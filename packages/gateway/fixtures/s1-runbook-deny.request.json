@@ -1,0 +1,44 @@
+{
+  "schema_version": "govreplay.agent_action_request.v1",
+  "request_id": "req-s1-runbook-deny",
+  "scenario_id": "S1_runbook_update",
+  "workflow_id": "wf-gateway-s1-runbook-deny",
+  "run_id": "run-gateway-fixture-001",
+  "requested_at": "2026-07-04T16:01:00Z",
+  "actor": {
+    "actor_id": "govprov:actor:agent-runbook-001",
+    "actor_type": "agent",
+    "roles": ["AGENT_ROLE"]
+  },
+  "action": {
+    "action_id": "action-gateway-S1-0002",
+    "action_type": "propose_runbook_update",
+    "risk": "low"
+  },
+  "resource": {
+    "resource_id": "runbook:cache-timeout-remediation",
+    "resource_type": "GovernedResource",
+    "environment": "documentation"
+  },
+  "policy": {
+    "bundle_ref": "software-delivery-p1-baseline",
+    "policy_version": "P1"
+  },
+  "policy_context": {
+    "risk_tier": "low",
+    "evidence_profile": "missing",
+    "approval_profile": "single_doc_approver",
+    "artifact_linkage": "unverified",
+    "policy_ref_profile": "bundle_hash_present"
+  },
+  "evidence_refs": [],
+  "artifact_refs": [
+    {
+      "id": "artifact-gateway-S1-runbook",
+      "type": "runbook_markdown",
+      "uri": "scenario://S1_runbook_update/expected/artifact.md"
+    }
+  ],
+  "approval_refs": [],
+  "deployment_refs": []
+}

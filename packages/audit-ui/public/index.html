@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GovReplay Audit UI</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>GovReplay Audit UI</h1>
+        <p id="data-status">Loading audit data...</p>
+      </div>
+      <nav aria-label="Primary views">
+        <button class="tab is-active" data-view="runs">Runs</button>
+        <button class="tab" data-view="metrics">Metrics</button>
+        <button class="tab" data-view="replay">Replay</button>
+        <button class="tab" data-view="faults">Faults</button>
+        <button class="tab" data-view="demo">Demo</button>
+      </nav>
+    </header>
+    <main>
+      <section id="runs" class="view is-active"></section>
+      <section id="metrics" class="view"></section>
+      <section id="replay" class="view"></section>
+      <section id="faults" class="view"></section>
+      <section id="demo" class="view"></section>
+    </main>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,117 @@
+{
+  "_type": "https://govprov.dev/attestation/v1",
+  "schema_version": "govprov.attestation.v1",
+  "attestation_type": "PolicyDecisionAttestation",
+  "predicate_type": "https://govprov.dev/predicate/policy-decision/v1",
+  "subject": [
+    {
+      "name": "policy-decision/software-delivery-p1-baseline/deny-runbook-missing-evidence.json",
+      "digest": {
+        "algorithm": "sha256",
+        "value": "0x1141931490270ad509e10bbb631cf9c01af53e99c0d694d7d243f105247609ad"
+      },
+      "uri": "cas://sha256/1141931490270ad509e10bbb631cf9c01af53e99c0d694d7d243f105247609ad"
+    }
+  ],
+  "parents": [],
+  "created_at": "2026-06-20T00:00:00Z",
+  "created_by": {
+    "actor_id": "govprov:actor:policy-service",
+    "actor_type": "service",
+    "ethereum_address": "0x6813eb9362372eef6200f3b1dbc3f819671cba69"
+  },
+  "policy": {
+    "policy_id": "software-delivery-governance",
+    "policy_hash": "0xee5bf73acae02c902248d4df2ea4eeaa049ea70b6c785446f55e70faa37e9634",
+    "scope_hash": "0x4699a0d0850b006a8b2cb2affb3a429e2051891c200c94dea0a8ea9fabf3b075"
+  },
+  "predicate": {
+    "workflow_id": "wf-p1-runbook-deny",
+    "run_id": "run-policy-version-fixture-001",
+    "evaluated_at": "2026-06-20T00:00:00Z",
+    "policy_service_run_id": "govreplay:policy-evaluator:cedar-subset",
+    "evaluator_identity": "govreplay:policy-evaluator:cedar-subset",
+    "evaluator_version": "cedar-policy-4.11.1-compatible-ts-subset.v1",
+    "evaluator_policy_language": "cedar",
+    "matched_policy_ids": [],
+    "policy": {
+      "policy_id": "software-delivery-governance",
+      "policy_version": "1.0.0",
+      "policy_bundle_version": "1.0.0",
+      "policy_hash": {
+        "algorithm": "sha256",
+        "value": "0xee5bf73acae02c902248d4df2ea4eeaa049ea70b6c785446f55e70faa37e9634"
+      },
+      "parent_policy_bundle_hash": null,
+      "policy_bundle_uri": "cas://sha256/ee5bf73acae02c902248d4df2ea4eeaa049ea70b6c785446f55e70faa37e9634",
+      "policy_engine": "cedar",
+      "policy_engine_version": "cedar-policy-4.11.1"
+    },
+    "action_id": "propose_runbook_update",
+    "decision": "deny",
+    "policy_bundle_hash": "0xee5bf73acae02c902248d4df2ea4eeaa049ea70b6c785446f55e70faa37e9634",
+    "policy_bundle_version": "1.0.0",
+    "policy_input_hash": "0xab159f86e6626fd7047149f8c2043232b2b75af463f522553d48ece718d644bf",
+    "policy_input_digest": {
+      "algorithm": "sha256",
+      "value": "0xab159f86e6626fd7047149f8c2043232b2b75af463f522553d48ece718d644bf"
+    },
+    "obligations_hash": "0x0a95ccdcf61da1e670434426dccc06eb1fe2a44919f3865f6c54f45f898bfefd",
+    "obligation_ids": [
+      "p1-runbook-baseline"
+    ],
+    "resolved_obligations": [
+      {
+        "schema_version": "govprov.resolved_obligation.v1",
+        "id": "p1-runbook-baseline",
+        "policy_bundle_hash": "0xee5bf73acae02c902248d4df2ea4eeaa049ea70b6c785446f55e70faa37e9634",
+        "action_id": "propose_runbook_update",
+        "resource_environment": "documentation",
+        "decision_ttl_seconds": 300,
+        "categories": {
+          "required_evidence": {
+            "min_count": 1,
+            "evidence_types": [
+              "incident_report"
+            ]
+          },
+          "required_approval_roles": [
+            "DOC_APPROVER"
+          ],
+          "separation_of_duties": {
+            "proposer_cannot_approve": true,
+            "distinct_approval_count": 1
+          },
+          "deployment_environment_constraints": {
+            "allowed_environments": [
+              "documentation",
+              "staging"
+            ],
+            "forbidden_environments": [
+              "production"
+            ]
+          },
+          "attestation_requirements": {
+            "required_attestation_types": [
+              "EvidenceBundleAttestation",
+              "ApprovalAttestation",
+              "PolicyDecisionAttestation"
+            ],
+            "policy_decision_must_include_bundle_hash": true
+          },
+          "expiration": {
+            "approval_max_age_seconds": 86400,
+            "evidence_max_age_seconds": 604800
+          }
+        }
+      }
+    ],
+    "policy_decision_hash": "0x7c44d5922279f897833b6d2756c2a5e3268c8e0afd50c4915ddeaebc2a05d09b"
+  },
+  "attestation_hash": "0x3ac09452576e2985dfe76b18486acfa1bc71c01f932442d0dbb709dae96796ec",
+  "signature": {
+    "profile": "govprov-ethsign-secp256k1-v1",
+    "signature": "0x45d2a993b492d290da18898f026a583e582ab8efc9dc92b91e869054df68793b177e19d42d2a6ff1152a8993750b3217a77a50847a510d87b64b839e95805d8c1b",
+    "signer": "0x6813eb9362372eef6200f3b1dbc3f819671cba69"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "_type": "https://govprov.dev/attestation/v1",
+  "schema_version": "govprov.attestation.v1",
+  "attestation_type": "ApprovalAttestation",
+  "predicate_type": "https://govprov.dev/predicate/approval/v1",
+  "subject": [
+    {
+      "name": "approval-1001",
+      "digest": {
+        "algorithm": "sha256",
+        "value": "0x9999999999999999999999999999999999999999999999999999999999999999"
+      }
+    }
+  ],
+  "parents": [
+    "0xdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+  ],
+  "created_at": "2026-06-20T00:04:00Z",
+  "created_by": {
+    "actor_id": "govprov:actor:security-approver",
+    "actor_type": "human",
+    "ethereum_address": "0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf"
+  },
+  "policy": {
+    "policy_id": "govprov:policy:delivery-v1",
+    "policy_hash": "0x2222222222222222222222222222222222222222222222222222222222222222",
+    "scope_hash": "0x3333333333333333333333333333333333333333333333333333333333333333"
+  },
+  "predicate": {
+    "approval_id": "apr-1001",
+    "decision": "approved",
+    "approval_role": "SECURITY_APPROVER_ROLE",
+    "artifact_hash": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+  }
+}

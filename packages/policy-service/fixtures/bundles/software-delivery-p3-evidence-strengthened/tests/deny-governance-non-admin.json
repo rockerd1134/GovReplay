@@ -1,0 +1,29 @@
+{
+  "name": "P3 denies non-admin governance state change",
+  "expected_decision": "deny",
+  "input": {
+    "principal": {
+      "id": "govprov:actor:agent-governance-admin-001",
+      "type": "Agent",
+      "roles": ["AGENT_ROLE"]
+    },
+    "action": {
+      "id": "request_governance_state_change",
+      "type": "GovernedAction"
+    },
+    "resource": {
+      "id": "policy:software-delivery-p3:activate",
+      "type": "GovernedResource",
+      "environment": "governance"
+    },
+    "context": {
+      "risk_tier": "high",
+      "evidence_profile": "governance_change_request",
+      "approval_profile": "governance_admin",
+      "artifact_linkage": "contract_directory_update",
+      "policy_ref_profile": "bundle_hash_present",
+      "workflow_id": "wf-p3-governance-deny",
+      "run_id": "run-policy-version-fixture-003"
+    }
+  }
+}

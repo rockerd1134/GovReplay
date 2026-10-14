@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://govprov.dev/schemas/policy-bundle/obligations.schema.json",
+  "title": "GovReplay Policy Obligations",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "defaults", "obligations"],
+  "properties": {
+    "schema_version": {
+      "const": "govprov.obligations.v1"
+    },
+    "defaults": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["decision_ttl_seconds"],
+      "properties": {
+        "decision_ttl_seconds": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "obligations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/obligation"
+      }
+    }
+  },
+  "$defs": {
+    "non_empty_strings": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "obligation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "description",
+        "applies_to_actions",
+        "required_evidence",
+        "required_approval_roles",
+        "separation_of_duties",
+        "deployment_environment_constraints",
+        "attestation_requirements",
+        "expiration"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*$"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "applies_to_actions": {
+          "$ref": "#/$defs/non_empty_strings"
+        },
+        "required_evidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["min_count", "evidence_types"],
+          "properties": {
+            "min_count": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "evidence_types": {
+              "$ref": "#/$defs/non_empty_strings"
+            }
+          }
+        },
+        "required_approval_roles": {
+          "$ref": "#/$defs/non_empty_strings"
+        },
+        "separation_of_duties": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["proposer_cannot_approve", "distinct_approval_count"],
+          "properties": {
+            "proposer_cannot_approve": {
+              "type": "boolean"
+            },
+            "distinct_approval_count": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "deployment_environment_constraints": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["allowed_environments", "forbidden_environments"],
+          "properties": {
+            "allowed_environments": {
+              "$ref": "#/$defs/non_empty_strings"
+            },
+            "forbidden_environments": {
+              "$ref": "#/$defs/non_empty_strings"
+            }
+          }
+        },
+        "attestation_requirements": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "required_attestation_types",
+            "policy_decision_must_include_bundle_hash"
+          ],
+          "properties": {
+            "required_attestation_types": {
+              "$ref": "#/$defs/non_empty_strings"
+            },
+            "policy_decision_must_include_bundle_hash": {
+              "type": "boolean"
+            }
+          }
+        },
+        "expiration": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["approval_max_age_seconds", "evidence_max_age_seconds"],
+          "properties": {
+            "approval_max_age_seconds": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "evidence_max_age_seconds": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://govprov.dev/schemas/agent-action-request/v1.schema.json",
+  "title": "AgentActionRequest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "request_id",
+    "scenario_id",
+    "workflow_id",
+    "run_id",
+    "requested_at",
+    "actor",
+    "action",
+    "resource",
+    "policy",
+    "policy_context",
+    "evidence_refs",
+    "artifact_refs",
+    "approval_refs",
+    "deployment_refs"
+  ],
+  "properties": {
+    "schema_version": { "const": "govreplay.agent_action_request.v1" },
+    "request_id": {
+      "type": "string",
+      "pattern": "^req-[A-Za-z0-9._-]+$"
+    },
+    "scenario_id": {
+      "type": "string",
+      "pattern": "^S[1-5]_[A-Za-z0-9_]+$"
+    },
+    "workflow_id": {
+      "type": "string",
+      "pattern": "^wf-[A-Za-z0-9._-]+$"
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "requested_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["actor_id", "actor_type", "roles"],
+      "properties": {
+        "actor_id": { "type": "string", "minLength": 1 },
+        "actor_type": { "enum": ["agent", "service"] },
+        "roles": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1
+        }
+      }
+    },
+    "action": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["action_id", "action_type", "risk"],
+      "properties": {
+        "action_id": { "type": "string", "minLength": 1 },
+        "action_type": { "type": "string", "minLength": 1 },
+        "risk": { "enum": ["low", "medium", "high"] }
+      }
+    },
+    "resource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["resource_id", "resource_type", "environment"],
+      "properties": {
+        "resource_id": { "type": "string", "minLength": 1 },
+        "resource_type": { "type": "string", "minLength": 1 },
+        "environment": { "type": "string", "minLength": 1 }
+      }
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["bundle_ref", "policy_version"],
+      "properties": {
+        "bundle_ref": { "type": "string", "minLength": 1 },
+        "policy_version": {
+          "type": "string",
+          "pattern": "^P[1-9][0-9]*$"
+        }
+      }
+    },
+    "policy_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "risk_tier",
+        "evidence_profile",
+        "approval_profile",
+        "artifact_linkage",
+        "policy_ref_profile"
+      ],
+      "properties": {
+        "risk_tier": { "enum": ["low", "medium", "high"] },
+        "evidence_profile": { "type": "string", "minLength": 1 },
+        "approval_profile": { "type": "string", "minLength": 1 },
+        "artifact_linkage": { "type": "string", "minLength": 1 },
+        "policy_ref_profile": { "type": "string", "minLength": 1 }
+      }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/ref" }
+    },
+    "artifact_refs": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/ref" }
+    },
+    "approval_refs": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/ref" }
+    },
+    "deployment_refs": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/ref" }
+    }
+  },
+  "$defs": {
+    "digest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "value"],
+      "properties": {
+        "algorithm": { "const": "sha256" },
+        "value": {
+          "type": "string",
+          "pattern": "^0x[0-9a-f]{64}$"
+        }
+      }
+    },
+    "ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "type": { "type": "string", "minLength": 1 },
+        "uri": { "type": "string", "minLength": 1 },
+        "digest": { "$ref": "#/$defs/digest" }
+      }
+    }
+  }
+}

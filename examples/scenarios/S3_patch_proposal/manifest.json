@@ -1,0 +1,17 @@
+{
+  "schema_version": "govprov.scenario_manifest.v1",
+  "scenario_id": "S3_patch_proposal",
+  "scenario_name": "Patch Proposal",
+  "workflow_id": "wf-S3-P3-F0-0001",
+  "policy_version": "P3",
+  "fault_id": "F0",
+  "mode": "signed_offchain",
+  "expected_verdict": "pass",
+  "expected_failure_code": null,
+  "expected_failure_stage": null,
+  "expected_historical_compliance": "pass",
+  "expected_current_compliance": "pass",
+  "primary_actor_id": "agent.patch_author",
+  "resource_id": "services/payment-api/retry.ts",
+  "created_at": "2026-06-21T02:00:00Z"
+}

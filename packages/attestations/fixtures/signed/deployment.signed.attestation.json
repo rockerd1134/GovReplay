@@ -1,0 +1,46 @@
+{
+  "_type": "https://govprov.dev/attestation/v1",
+  "schema_version": "govprov.attestation.v1",
+  "attestation_type": "DeploymentAttestation",
+  "predicate_type": "https://govprov.dev/predicate/deployment/v1",
+  "subject": [
+    {
+      "name": "deployment-1001",
+      "digest": {
+        "algorithm": "sha256",
+        "value": "0x245c3cf2c8208d1bae145d9fab5eff6dfa8a8f78a00f37b870e4aab5918bcede"
+      },
+      "uri": "cas://sha256/245c3cf2c8208d1bae145d9fab5eff6dfa8a8f78a00f37b870e4aab5918bcede"
+    }
+  ],
+  "parents": [
+    "0xadd69164cbae3eb9daa42661e9f3172ba2d273352a3bec95628156652bbc50c3",
+    "0xcaed0105073367e811317ae1f9d706d87ec0922d7608993db4b415ea195d3179"
+  ],
+  "created_at": "2026-06-20T00:06:00Z",
+  "created_by": {
+    "actor_id": "govprov:actor:deployer",
+    "actor_type": "human",
+    "ethereum_address": "0x1eff47bc3a10a45d4b230b5d10e37751fe6aa718"
+  },
+  "governance_domain": "deployment_domain",
+  "governance_domain_type": "deployment_registry_and_artifact_consistency",
+  "governance_domain_id": "govreplay:domain:deployment_domain",
+  "policy": {
+    "policy_id": "govprov:policy:delivery-v1",
+    "policy_hash": "0x2222222222222222222222222222222222222222222222222222222222222222",
+    "scope_hash": "0x3333333333333333333333333333333333333333333333333333333333333333"
+  },
+  "predicate": {
+    "deployment_id": "dep-1001",
+    "environment": "staging",
+    "artifact_hash": "0xcaed0105073367e811317ae1f9d706d87ec0922d7608993db4b415ea195d3179",
+    "approval_hash": "0xadd69164cbae3eb9daa42661e9f3172ba2d273352a3bec95628156652bbc50c3"
+  },
+  "attestation_hash": "0x79e69e2ae3cc13d3bcf72e39834c4d6089088364647823db01f7cfc3265d2131",
+  "signature": {
+    "profile": "govprov-ethsign-secp256k1-v1",
+    "signature": "0x1a9726db19d71d1495cf63290a75932383ff82d4855814a7360ecfc3bf03f5c83fa7a9d47f4c522e9e489b83979218813c5808c0e6206ecde068653779be03051b",
+    "signer": "0x1eff47bc3a10a45d4b230b5d10e37751fe6aa718"
+  }
+}

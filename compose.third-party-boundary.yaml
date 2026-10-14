@@ -1,0 +1,20 @@
+services:
+  in-toto-probe:
+    build:
+      context: ./packages/experiments/third-party-boundary
+      dockerfile: in-toto.Dockerfile
+    volumes:
+      - ./packages/experiments/third-party-boundary:/probe:ro
+      - ./runs/third-party-boundary:/out
+    network_mode: none
+    command: ["--out", "/out/in-toto-compose"]
+
+  gittuf-probe:
+    build:
+      context: ./packages/experiments/third-party-boundary
+      dockerfile: gittuf.Dockerfile
+    volumes:
+      - ./packages/experiments/third-party-boundary:/probe:ro
+      - ./runs/third-party-boundary:/out
+    network_mode: none
+    command: ["--binary", "/usr/local/bin/gittuf", "--out", "/out/gittuf-compose-control-1", "--case", "control"]

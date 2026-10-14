@@ -1,0 +1,11 @@
+{
+  "deployment_id": "deployment-S4-0001",
+  "environment": "staging",
+  "service": "payment-api",
+  "artifact_id": "artifact-S4-0001",
+  "approval_id": "approval-S4-0001",
+  "policy_version": "P3",
+  "status": "deployed",
+  "deployed_at": "2026-06-21T00:06:00Z"
+}
+

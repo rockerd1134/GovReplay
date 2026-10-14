@@ -1,0 +1,9 @@
+{
+  "alert_id": "alert-S2-0001",
+  "service": "payment-api",
+  "window": "2026-06-21T00:40:00Z/2026-06-21T00:55:00Z",
+  "signal": "timeout_error_rate",
+  "observed_rate": 0.081,
+  "threshold": 0.05,
+  "recommended_timeout_ms": 2500
+}

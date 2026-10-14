@@ -1,0 +1,15 @@
+{
+  "name": "@govprov/audit-replay",
+  "version": "0.1.0",
+  "private": true,
+  "license": "Apache-2.0",
+  "type": "module",
+  "description": "GovReplay local audit replay CLI and verifier.",
+  "scripts": {
+    "test": "node --test --experimental-strip-types test/*.test.ts",
+    "replay": "node --experimental-strip-types src/cli.ts"
+  },
+  "engines": {
+    "node": ">=22.6"
+  }
+}

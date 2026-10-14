@@ -1,0 +1,190 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://govprov.dev/schemas/scenarios/manifest.schema.json",
+  "title": "GovReplay scenario manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "scenario_id",
+    "scenario_name",
+    "workflow_id",
+    "policy_version",
+    "fault_id",
+    "mode",
+    "expected_verdict",
+    "expected_failure_code",
+    "expected_failure_stage",
+    "expected_historical_compliance",
+    "expected_current_compliance",
+    "primary_actor_id",
+    "resource_id",
+    "created_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "govprov.scenario_manifest.v1"
+    },
+    "scenario_id": {
+      "type": "string",
+      "pattern": "^S[1-9][0-9]*(_[a-z0-9]+)*$"
+    },
+    "scenario_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "workflow_id": {
+      "type": "string",
+      "pattern": "^wf-[A-Za-z0-9_-]+$"
+    },
+    "policy_version": {
+      "type": "string",
+      "pattern": "^P[1-9][0-9]*$"
+    },
+    "fault_id": {
+      "type": "string",
+      "pattern": "^F[0-9]+$"
+    },
+    "mode": {
+      "type": "string",
+      "enum": ["structured_logs", "signed_offchain", "govreplay_besu"]
+    },
+    "governance_domain": {
+      "type": "string",
+      "enum": [
+        "identity_domain",
+        "policy_domain",
+        "approval_domain",
+        "deployment_domain",
+        "anchor_domain",
+        "contract_domain",
+        "audit_domain"
+      ]
+    },
+    "governance_domain_type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "governance_domain_id": {
+      "type": "string",
+      "pattern": "^govreplay:domain:[a-z_]+$"
+    },
+    "expected_domain": {
+      "type": "string",
+      "enum": [
+        "identity_domain",
+        "policy_domain",
+        "approval_domain",
+        "deployment_domain",
+        "anchor_domain",
+        "contract_domain",
+        "audit_domain"
+      ]
+    },
+    "domain_fault": {
+      "type": "boolean"
+    },
+    "cross_domain_dependency": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "identity_domain",
+          "policy_domain",
+          "approval_domain",
+          "deployment_domain",
+          "anchor_domain",
+          "contract_domain",
+          "audit_domain"
+        ]
+      }
+    },
+    "expected_verdict": {
+      "type": "string",
+      "enum": ["pass", "fail"]
+    },
+    "expected_failure_code": {
+      "type": ["string", "null"],
+      "minLength": 1
+    },
+    "expected_failure_stage": {
+      "type": ["string", "null"],
+      "enum": [
+        null,
+        "observation",
+        "evidence",
+        "policy",
+        "action",
+        "approval",
+        "artifact",
+        "deployment",
+        "artifact_deployment",
+        "ledger",
+        "replay"
+      ]
+    },
+    "expected_historical_compliance": {
+      "type": "string",
+      "enum": ["pass", "fail"]
+    },
+    "expected_current_compliance": {
+      "type": "string",
+      "enum": ["pass", "fail"]
+    },
+    "primary_actor_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "resource_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "expected_verdict": {
+            "const": "pass"
+          }
+        },
+        "required": ["expected_verdict"]
+      },
+      "then": {
+        "properties": {
+          "expected_failure_code": {
+            "const": null
+          },
+          "expected_failure_stage": {
+            "const": null
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "expected_verdict": {
+            "const": "fail"
+          }
+        },
+        "required": ["expected_verdict"]
+      },
+      "then": {
+        "properties": {
+          "expected_failure_code": {
+            "type": "string",
+            "minLength": 1
+          },
+          "expected_failure_stage": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  ]
+}

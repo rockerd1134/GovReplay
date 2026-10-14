@@ -1,0 +1,8 @@
+{
+  "deployment_id": "deployment-S2-0001",
+  "deployment_type": "apply_config",
+  "environment": "staging",
+  "resource_id": "services/payment-api/config.yaml",
+  "artifact_id": "artifact-S2-0001",
+  "status": "ready_for_apply"
+}

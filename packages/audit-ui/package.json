@@ -1,0 +1,16 @@
+{
+  "name": "@govprov/audit-ui",
+  "version": "0.1.0",
+  "private": true,
+  "license": "Apache-2.0",
+  "type": "module",
+  "description": "Lightweight GovReplay audit UI and Phase 7 run data adapter.",
+  "scripts": {
+    "test": "node --test --experimental-strip-types test/*.test.ts",
+    "build:demo": "node --experimental-strip-types src/build-demo-data.ts --run-root ../../runs/phase7-minimum --out public/demo-data/ui-data.json",
+    "serve": "node --experimental-strip-types src/static-server.ts --root public --port 4173"
+  },
+  "engines": {
+    "node": ">=22.6"
+  }
+}

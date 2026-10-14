@@ -1,0 +1,25 @@
+{
+  "schema_version": "govprov.temporal_ordering_cases.v1",
+  "scope": "role_revocation_only",
+  "authorization_boundary_for_attestation_actor": "N",
+  "authoritative_order": {
+    "SEGL": "append_sequence",
+    "govreplay_besu": "blockNumber_transactionIndex_logIndex"
+  },
+  "roles": {
+    "required_at_N": "DEPLOYER_ROLE",
+    "writer_required_at_D": "LEDGER_WRITER_ROLE",
+    "actor_required_at_D": "DEPLOYER_ROLE"
+  },
+  "cases": [
+    {"case_id":"T1","ordered_events":["A","S","N","D"],"deployment_transaction_sender":"writer"},
+    {"case_id":"T2","ordered_events":["A","S","R","N","D"],"deployment_transaction_sender":"writer"},
+    {"case_id":"T3","ordered_events":["A","R","S","N","D"],"deployment_transaction_sender":"writer"},
+    {"case_id":"T4","ordered_events":["A","S","N","R","D"],"deployment_transaction_sender":"writer"},
+    {"case_id":"T5","ordered_events":["A","S","N","D","R"],"deployment_transaction_sender":"writer"},
+    {"case_id":"T6","ordered_events":["A","R","N","S","D"],"deployment_transaction_sender":"writer"},
+    {"case_id":"T7","ordered_events":["A","R","G","S","N","D"],"deployment_transaction_sender":"writer"},
+    {"case_id":"T8","ordered_events":["A","S","N","D","R","AUDIT"],"deployment_transaction_sender":"writer"},
+    {"case_id":"T4_SELF","ordered_events":["A","S","N","R","D"],"deployment_transaction_sender":"actor"}
+  ]
+}

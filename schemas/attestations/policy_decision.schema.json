@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://govprov.dev/schemas/attestations/policy_decision.schema.json",
+  "title": "PolicyDecisionAttestation",
+  "allOf": [
+    { "$ref": "./common.schema.json" },
+    {
+      "type": "object",
+      "properties": {
+        "attestation_type": { "const": "PolicyDecisionAttestation" },
+        "predicate_type": { "const": "https://govprov.dev/predicate/policy-decision/v1" },
+        "predicate": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["decision", "obligations", "policy_version"],
+          "properties": {
+            "decision": { "enum": ["allow", "deny"] },
+            "obligations": { "type": "array", "items": { "type": "string" } },
+            "policy_version": { "type": "string" }
+          }
+        }
+      }
+    }
+  ]
+}

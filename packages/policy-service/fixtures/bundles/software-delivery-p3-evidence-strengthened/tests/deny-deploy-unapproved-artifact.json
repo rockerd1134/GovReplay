@@ -1,0 +1,29 @@
+{
+  "name": "P3 denies deployment with unapproved artifact linkage",
+  "expected_decision": "deny",
+  "input": {
+    "principal": {
+      "id": "govprov:actor:agent-deploy-001",
+      "type": "Agent",
+      "roles": ["AGENT_ROLE"]
+    },
+    "action": {
+      "id": "deploy_artifact",
+      "type": "GovernedAction"
+    },
+    "resource": {
+      "id": "deployment:payment-api:prod",
+      "type": "GovernedResource",
+      "environment": "production"
+    },
+    "context": {
+      "risk_tier": "high",
+      "evidence_profile": "deployment_with_anchor",
+      "approval_profile": "deploy_approver_distinct",
+      "artifact_linkage": "unapproved_artifact",
+      "policy_ref_profile": "bundle_hash_present",
+      "workflow_id": "wf-p3-deploy-deny",
+      "run_id": "run-policy-version-fixture-003"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "schema_version": "govprov.expected_audit.v1",
+  "scenario_id": "S4_policy_gated_deployment",
+  "workflow_id": "wf-S4-P3-F0-0001",
+  "deployment_id": "deployment-S4-0001",
+  "expected_verdict": "pass",
+  "expected_backward_chain": [
+    "DeploymentAttestation",
+    "ArtifactAttestation",
+    "ApprovalAttestation",
+    "AgentActionAttestation",
+    "PolicyDecisionAttestation",
+    "EvidenceBundleAttestation",
+    "ObservationAttestation"
+  ]
+}

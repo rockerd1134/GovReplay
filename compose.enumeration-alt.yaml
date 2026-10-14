@@ -1,0 +1,11 @@
+# Optional second local dev chain for parallel baseline/hardened enumeration.
+# Use with -p software-enumeration-alt -f compose.yaml -f compose.enumeration-alt.yaml.
+# Each run still uses its own fresh deployment and run ID.
+services:
+  besu-dev:
+    ports: !override
+      - "127.0.0.1:8546:8545"
+    volumes: !override
+      - ./.tmp/besu-alt-data:/var/lib/besu
+      - ./chain/besu/dev/qbft-config.json:/etc/besu/qbft-config.json:ro
+      - ./chain/besu/dev/start-besu-dev.sh:/etc/besu/start-besu-dev.sh:ro

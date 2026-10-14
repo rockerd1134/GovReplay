@@ -1,0 +1,89 @@
+{
+  "schema_version": "govprov.contract-addresses.v1",
+  "chain": {
+    "chain_id": 1337,
+    "network": "synthetic-foundry-export",
+    "genesis_hash": "0x4412f3a7ffaf2a898f9e3c1f6ae0a84fbde4eea160b8f8d0b91c2fbd95dcc5d5",
+    "rpc_endpoint_hash": "0x9bad108d759a5d93253b3d2f6e28ca7a7df95fcb58a3ab5f6d7d272b40207b58"
+  },
+  "build": {
+    "generated_at": "1970-01-01T00:00:00Z",
+    "tool": "forge",
+    "solc_version": "0.8.26",
+    "manifest_kind": "synthetic-fixture"
+  },
+  "contract_set_id": "0x7e03d7c6b569d97d8959a0501848b746b1a76d80a2fecf45f35779e6272bdfde",
+  "governance_admin": {
+    "address": "0x10000000000000000000000000000000000000aa",
+    "actor_id_hash": "0xe7769b61e5965cf13fac2a415c44a2af3f1aee423184943a4d3b05a8be391443"
+  },
+  "active_scopes": [
+    {
+      "scope_hash": "0xebc8d3aa1e7ec3112373938716f9dca85d9686e981fa29d1c06c8ff22f30d949",
+      "metadata_hash": "0x67c19a6ce6c209001286758f5600f5c8f1a963f28aa00ff951fcb1b13293e5a8"
+    }
+  ],
+  "active_policies": [
+    {
+      "scope_hash": "0xebc8d3aa1e7ec3112373938716f9dca85d9686e981fa29d1c06c8ff22f30d949",
+      "policy_hash": "0x01a328f9e6f03926345450cf7c61df6cc715297cc41f5ad4c43dc14c6485ef51",
+      "metadata_hash": "0x2f8774a9e78999b46f673b7c5cd28a51fbad1004432666e5215453e99023a81c"
+    }
+  ],
+  "contracts": {
+    "ActorRegistry": {
+      "address": "0x1000000000000000000000000000000000000001",
+      "name_hash": "0x3dd8013c366c21af88b19971335b154b53f71321cf76763e7e0a5c230bb14f42",
+      "version_hash": "0x0cd11ba58a8be7c8ae6d31f41b1c627f412537f63bc2d0cb66e455ae6bf7e0a1",
+      "source_hash": "0x9c4e7d48fcd265be7d186034f6761649a24cbe4a1cefde9b2f5cff8d8e6de0a1",
+      "abi_hash": "0x2e142ee18f4b51846f9cab513feec37f88d562875d2f2297b3c58a1fb5bb43a7",
+      "metadata_hash": "0xf559e15f357e37df6a801b3881a2c2a428709e98334f4d4994516f8f27a1cf0d",
+      "source_path_hash": "0x88c8e1d3f2045b2ad0104d1b4d9b63a418366d685a58d19937469e084508fb5f"
+    },
+    "PolicyRegistry": {
+      "address": "0x1000000000000000000000000000000000000002",
+      "name_hash": "0x068865c6112a12ff55f7c6da37e85ee2a7a842bda218ab0322867b57ffad7f89",
+      "version_hash": "0x0631abe060f034fa4436ac8fe8eec8ad85315b04de23e9c7ad08b6320b88c010",
+      "source_hash": "0x3cfc874a18dbfdce477fa6e2d55edfa9899afef88ab7d80daf6486604690d486",
+      "abi_hash": "0x323c17e00b1b4ebedac1fd2cd42c153af3a7aeb5a7906a411275c3780cf9a8af",
+      "metadata_hash": "0x614aa94995f7d9445f2239719b1f9558f384bcbbbd7c6de477e7181d508ef00a",
+      "source_path_hash": "0x41c3fd829a530a4276a9e5adf0824d21d7194ce3b491a387297d8039d26d80f1"
+    },
+    "ProvenanceRegistry": {
+      "address": "0x1000000000000000000000000000000000000003",
+      "name_hash": "0xd430af45e9846cc64aaef88405adfc2b6fae5ae0e3d161c7642bdfc37d78c725",
+      "version_hash": "0x138a82c62745e0f1b26181e9b7c760bb4b1740f327fb1562929e9f8d492f1606",
+      "source_hash": "0xd09874589352e33623c792f3ac9a8182a1a627ae0c0e1f7f264572106395ec03",
+      "abi_hash": "0xa08cd7b2e4be24ee6aa4d33706a5daf3e1e8070c4774d2cbb661b4b107b1a2c3",
+      "metadata_hash": "0x29b37f0e0d6b6ebf198193c8cb6ddf4c58057cf8f764032305305f0827bdb901",
+      "source_path_hash": "0x909d931976d40a6a774d6410e4be0e75d17f22a332e0609ef0fd7e8d4c6473c2"
+    },
+    "ApprovalRegistry": {
+      "address": "0x1000000000000000000000000000000000000004",
+      "name_hash": "0x561230b9048fd5aef38e3f157f63ce2f83cd3f8c4f092d4769a3e5e0f57acafa",
+      "version_hash": "0xfcd890f0b28df22053c6c6e1f4ec4f4d211f58a6400941cc799a152a01d312b1",
+      "source_hash": "0x9fe187f30d5c7e05de1248bb363c5849b2715cc3d5296d6c378d37cc52d9d1e4",
+      "abi_hash": "0x25eb8d79f60598eb1f1894e3c4f9787bb775b72435b8b77fd9779a078f117428",
+      "metadata_hash": "0x46f5b4d7c08f5930d6fcbe0e371031f6ed32b40864c3e098e1e8710daefdc39a",
+      "source_path_hash": "0x637d9070bd07365819f2102ebf580a39632da13f1dfba2e19fef32cfdb652a04"
+    },
+    "DeploymentRegistry": {
+      "address": "0x1000000000000000000000000000000000000005",
+      "name_hash": "0xeb0452719decda7938c312ff74de93b6c039b2db14ee0450884b01365682cb99",
+      "version_hash": "0xe847db2a06f3da40c1e89b66ee7393768c6f3b5be93db429c34b3b1cd1ba2330",
+      "source_hash": "0x6ac4a7b3e86297a0c3b4bebc712a7579ef3cbb0e25cf249973f8886a273aeec2",
+      "abi_hash": "0x18f58589546e6c56a056f86381988f909991987d13d63319b8c4c1f9ab261a69",
+      "metadata_hash": "0xc8f9441e92f2108413b957f8e00323743d80816a65014d297ae6f39014324747",
+      "source_path_hash": "0xe1b0d7e8e44238625ac9a8ec880a3a3e79174754717048cc69b59f06b51921e6"
+    },
+    "ContractDirectory": {
+      "address": "0x1000000000000000000000000000000000000006",
+      "name_hash": "0xa830c83f3642d98c345d79b7f62c283749b33d98edfedb9cc1a4388e0d61f8d9",
+      "version_hash": "0xc9ad7c43a3070c8f5df00387939537a6a7ef842224876a911d61c114cb4f1d3c",
+      "source_hash": "0x08656c682f8ca8722df65fe98961acfe63f94f1f9987036be4b1fe7b22c1d598",
+      "abi_hash": "0xa2fb9822ed8272fbf0342e21170ca40566626f98c3a3ec3a59ba66b5fc4453a9",
+      "metadata_hash": "0x90584a865d9c3866453f1448c8215c78ab70de16622f8c6bb277395ad606b654",
+      "source_path_hash": "0x20a04f3bd2941d846a1d8d3a401b41e0b9e56c6019a5a2b563981e50b24c35e3"
+    }
+  }
+}

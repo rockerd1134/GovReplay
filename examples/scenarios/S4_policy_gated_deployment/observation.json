@@ -1,0 +1,9 @@
+{
+  "observation_id": "obs-S4-0001",
+  "observed_at": "2026-06-21T00:00:00Z",
+  "source": "release_queue",
+  "summary": "Payment API release candidate 2026.06.21 is ready for governed staging deployment.",
+  "requested_by": "release-coordinator",
+  "risk_level": "medium"
+}
+

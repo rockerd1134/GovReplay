@@ -1,0 +1,10 @@
+{
+  "artifact_id": "artifact-S4-0001",
+  "artifact_type": "container_image_manifest",
+  "service": "payment-api",
+  "image": "registry.local/payment-api:2026.06.21-rc1",
+  "source_commit": "3a1f9d5c6b7e8a90123456789abcdef012345678",
+  "build_id": "build-S4-0001",
+  "digest_note": "This concise fixture is the prebuilt artifact manifest whose file digest is governed."
+}
+

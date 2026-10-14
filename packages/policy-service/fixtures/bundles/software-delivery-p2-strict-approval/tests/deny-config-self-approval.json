@@ -1,0 +1,29 @@
+{
+  "name": "P2 denies high-risk config change with self approval profile",
+  "expected_decision": "deny",
+  "input": {
+    "principal": {
+      "id": "govprov:actor:agent-config-001",
+      "type": "Agent",
+      "roles": ["AGENT_ROLE"]
+    },
+    "action": {
+      "id": "propose_config_change",
+      "type": "GovernedAction"
+    },
+    "resource": {
+      "id": "service:payment-api:config",
+      "type": "GovernedResource",
+      "environment": "production"
+    },
+    "context": {
+      "risk_tier": "high",
+      "evidence_profile": "config_diff",
+      "approval_profile": "self_approved",
+      "artifact_linkage": "approved_artifact",
+      "policy_ref_profile": "bundle_hash_present",
+      "workflow_id": "wf-p2-config-deny",
+      "run_id": "run-policy-version-fixture-002"
+    }
+  }
+}

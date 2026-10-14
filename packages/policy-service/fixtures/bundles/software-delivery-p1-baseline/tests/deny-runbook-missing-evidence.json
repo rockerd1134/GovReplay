@@ -1,0 +1,29 @@
+{
+  "name": "P1 denies runbook update without baseline evidence",
+  "expected_decision": "deny",
+  "input": {
+    "principal": {
+      "id": "govprov:actor:agent-runbook-001",
+      "type": "Agent",
+      "roles": ["AGENT_ROLE"]
+    },
+    "action": {
+      "id": "propose_runbook_update",
+      "type": "GovernedAction"
+    },
+    "resource": {
+      "id": "runbook:cache-timeout-remediation",
+      "type": "GovernedResource",
+      "environment": "documentation"
+    },
+    "context": {
+      "risk_tier": "low",
+      "evidence_profile": "missing",
+      "approval_profile": "single_doc_approver",
+      "artifact_linkage": "unverified",
+      "policy_ref_profile": "bundle_hash_present",
+      "workflow_id": "wf-p1-runbook-deny",
+      "run_id": "run-policy-version-fixture-001"
+    }
+  }
+}

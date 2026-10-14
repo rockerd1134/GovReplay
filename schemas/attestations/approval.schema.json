@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://govprov.dev/schemas/attestations/approval.schema.json",
+  "title": "ApprovalAttestation",
+  "allOf": [
+    { "$ref": "./common.schema.json" },
+    {
+      "type": "object",
+      "properties": {
+        "attestation_type": { "const": "ApprovalAttestation" },
+        "predicate_type": { "const": "https://govprov.dev/predicate/approval/v1" },
+        "predicate": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["approval_id", "decision", "approval_role", "artifact_hash"],
+          "properties": {
+            "approval_id": { "type": "string" },
+            "decision": { "enum": ["approved", "rejected", "revoked"] },
+            "approval_role": { "type": "string" },
+            "artifact_hash": { "$ref": "./common.schema.json#/$defs/bytes32" }
+          }
+        }
+      }
+    }
+  ]
+}

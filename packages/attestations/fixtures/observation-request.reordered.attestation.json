@@ -1,0 +1,33 @@
+{
+  "predicate": {
+    "request_summary": "Prepare a governed staging deployment for service api.",
+    "source": "incident-ticket",
+    "observation_id": "obs-1001"
+  },
+  "policy": {
+    "scope_hash": "0x3333333333333333333333333333333333333333333333333333333333333333",
+    "policy_hash": "0x2222222222222222222222222222222222222222222222222222222222222222",
+    "policy_id": "govprov:policy:delivery-v1"
+  },
+  "created_by": {
+    "ethereum_address": "0x627306090abaB3A6e1400e9345bC60c78a8BEf57",
+    "actor_type": "agent",
+    "actor_id": "govprov:actor:agent-alpha"
+  },
+  "created_at": "2026-06-20T00:00:00Z",
+  "parents": [],
+  "subject": [
+    {
+      "uri": "cas://sha256/1111111111111111111111111111111111111111111111111111111111111111",
+      "digest": {
+        "value": "0x1111111111111111111111111111111111111111111111111111111111111111",
+        "algorithm": "sha256"
+      },
+      "name": "ticket-1001"
+    }
+  ],
+  "predicate_type": "https://govprov.dev/predicate/observation/v1",
+  "attestation_type": "ObservationAttestation",
+  "schema_version": "govprov.attestation.v1",
+  "_type": "https://govprov.dev/attestation/v1"
+}

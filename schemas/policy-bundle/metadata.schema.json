@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://govprov.dev/schemas/policy-bundle/metadata.schema.json",
+  "title": "GovReplay Policy Bundle Metadata",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "policy_bundle_id",
+    "version",
+    "created_at",
+    "author",
+    "parent_policy_bundle_hash",
+    "description",
+    "compatible_contract_set",
+    "policy_language",
+    "schema_version"
+  ],
+  "properties": {
+    "policy_bundle_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "author": {
+      "type": "string",
+      "pattern": "^govprov:actor:[a-zA-Z0-9._:-]+$"
+    },
+    "parent_policy_bundle_hash": {
+      "type": ["string", "null"],
+      "pattern": "^0x[0-9a-f]{64}$"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "compatible_contract_set": {
+      "type": "string",
+      "minLength": 1
+    },
+    "policy_language": {
+      "const": "cedar"
+    },
+    "schema_version": {
+      "const": "govprov.policy_bundle.v1"
+    }
+  }
+}

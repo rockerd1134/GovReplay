@@ -1,0 +1,7 @@
+--- a/services/payment-api/config.yaml
++++ b/services/payment-api/config.yaml
+@@
+-request_timeout_ms: 1500
++request_timeout_ms: 2500
+ retry_budget: 2
+ circuit_breaker: enabled

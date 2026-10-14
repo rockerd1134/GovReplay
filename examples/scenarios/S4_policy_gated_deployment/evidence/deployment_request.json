@@ -1,0 +1,10 @@
+{
+  "request_id": "deploy-req-S4-0001",
+  "requested_environment": "staging",
+  "service": "payment-api",
+  "release_candidate": "payment-api:2026.06.21-rc1",
+  "artifact_ref": "artifact-S4-0001",
+  "change_ticket": "CHG-S4-0001",
+  "requested_at": "2026-06-21T00:00:30Z"
+}
+

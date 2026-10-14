@@ -1,0 +1,45 @@
+{
+  "_type": "https://govprov.dev/attestation/v1",
+  "schema_version": "govprov.attestation.v1",
+  "attestation_type": "LedgerAnchorAttestation",
+  "predicate_type": "https://govprov.dev/predicate/ledger-anchor/v1",
+  "subject": [
+    {
+      "name": "ledger-anchor-1001",
+      "digest": {
+        "algorithm": "sha256",
+        "value": "0x1a625f23b669e4333425892bc113c4b61497b12b9c625415a3994d16b45bff0d"
+      },
+      "uri": "cas://sha256/1a625f23b669e4333425892bc113c4b61497b12b9c625415a3994d16b45bff0d"
+    }
+  ],
+  "parents": [
+    "0x79e69e2ae3cc13d3bcf72e39834c4d6089088364647823db01f7cfc3265d2131"
+  ],
+  "created_at": "2026-06-20T00:07:00Z",
+  "created_by": {
+    "actor_id": "govprov:actor:ledger-writer",
+    "actor_type": "service",
+    "ethereum_address": "0xe1ab8145f7e55dc933d51a18c793f901a3a0b276"
+  },
+  "governance_domain": "anchor_domain",
+  "governance_domain_type": "provenance_anchor_and_merkle_root_readback",
+  "governance_domain_id": "govreplay:domain:anchor_domain",
+  "policy": {
+    "policy_id": "govprov:policy:delivery-v1",
+    "policy_hash": "0x2222222222222222222222222222222222222222222222222222222222222222",
+    "scope_hash": "0x3333333333333333333333333333333333333333333333333333333333333333"
+  },
+  "predicate": {
+    "chain_id": "1338",
+    "transaction_hash": "0xabababababababababababababababababababababababababababababababab",
+    "contract_address": "0x0000000000000000000000000000000000001001",
+    "anchored_hash": "0x79e69e2ae3cc13d3bcf72e39834c4d6089088364647823db01f7cfc3265d2131"
+  },
+  "attestation_hash": "0xa5ca746fcaabdda7c3a6fc788ce6ade7fd1f104b50baaab2d2be816f2f19eb45",
+  "signature": {
+    "profile": "govprov-ethsign-secp256k1-v1",
+    "signature": "0xb50fdfcdbcf03f9ed2a336b231768bb44b2574771e0b2bd7c504f55c2a752322261a656aba99a0976b4f13fdbd08ebf685edaa976266ac310d971c5e783687d51c",
+    "signer": "0xe1ab8145f7e55dc933d51a18c793f901a3a0b276"
+  }
+}

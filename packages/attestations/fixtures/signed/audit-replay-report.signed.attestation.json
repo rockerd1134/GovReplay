@@ -1,0 +1,45 @@
+{
+  "_type": "https://govprov.dev/attestation/v1",
+  "schema_version": "govprov.attestation.v1",
+  "attestation_type": "AuditReplayReport",
+  "predicate_type": "https://govprov.dev/predicate/audit-replay-report/v1",
+  "subject": [
+    {
+      "name": "audit-report-1001",
+      "digest": {
+        "algorithm": "sha256",
+        "value": "0xc3f923473a12985904d4d5a480e9f4a40f11498030fed7414ecb558ce29e5021"
+      },
+      "uri": "cas://sha256/c3f923473a12985904d4d5a480e9f4a40f11498030fed7414ecb558ce29e5021"
+    }
+  ],
+  "parents": [
+    "0xa5ca746fcaabdda7c3a6fc788ce6ade7fd1f104b50baaab2d2be816f2f19eb45"
+  ],
+  "created_at": "2026-06-20T00:08:00Z",
+  "created_by": {
+    "actor_id": "govprov:actor:verifier",
+    "actor_type": "service",
+    "ethereum_address": "0xe57bfe9f44b819898f47bf37e5af72a0783e1141"
+  },
+  "governance_domain": "audit_domain",
+  "governance_domain_type": "audit_replay_reports_and_metrics",
+  "governance_domain_id": "govreplay:domain:audit_domain",
+  "policy": {
+    "policy_id": "govprov:policy:delivery-v1",
+    "policy_hash": "0x2222222222222222222222222222222222222222222222222222222222222222",
+    "scope_hash": "0x3333333333333333333333333333333333333333333333333333333333333333"
+  },
+  "predicate": {
+    "audit_result": "pass",
+    "failure_codes": [],
+    "replay_duration_ms": "42",
+    "replay_target": "0x79e69e2ae3cc13d3bcf72e39834c4d6089088364647823db01f7cfc3265d2131"
+  },
+  "attestation_hash": "0xb1a11db9327bea9a4d2ff58e9aaf27add533b928a2c6cbdf7d441c03765e81c1",
+  "signature": {
+    "profile": "govprov-ethsign-secp256k1-v1",
+    "signature": "0xb62ed70804ab877a91288067eaf80f8e8f29b1938607e79cd6d14dd012b4de3c27e985b5f12b0b720306da6a77919434843ebbe6e3bc1aed9c80da9094e2cb051b",
+    "signer": "0xe57bfe9f44b819898f47bf37e5af72a0783e1141"
+  }
+}

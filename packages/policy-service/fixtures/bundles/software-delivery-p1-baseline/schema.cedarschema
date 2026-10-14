@@ -1,0 +1,51 @@
+namespace GovProv {
+  entity Agent = {
+    roles: Set<String>
+  };
+
+  entity GovernedResource = {
+    environment: String
+  };
+
+  action propose_runbook_update appliesTo {
+    principal: Agent,
+    resource: GovernedResource,
+    context: {
+      risk_tier: String,
+      evidence_profile: String,
+      approval_profile: String,
+      artifact_linkage: String,
+      policy_ref_profile: String,
+      workflow_id: String,
+      run_id: String
+    }
+  };
+
+  action propose_config_change appliesTo {
+    principal: Agent,
+    resource: GovernedResource,
+    context: {
+      risk_tier: String,
+      evidence_profile: String,
+      approval_profile: String,
+      artifact_linkage: String,
+      policy_ref_profile: String,
+      workflow_id: String,
+      run_id: String
+    }
+  };
+
+  action deploy_artifact appliesTo {
+    principal: Agent,
+    resource: GovernedResource,
+    context: {
+      risk_tier: String,
+      evidence_profile: String,
+      approval_profile: String,
+      artifact_linkage: String,
+      policy_ref_profile: String,
+      workflow_id: String,
+      run_id: String
+    }
+  };
+}

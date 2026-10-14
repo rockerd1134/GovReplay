@@ -1,0 +1,29 @@
+{
+  "name": "P3 allows deployment with approved artifact and ledger anchor",
+  "expected_decision": "allow",
+  "input": {
+    "principal": {
+      "id": "govprov:actor:agent-deploy-001",
+      "type": "Agent",
+      "roles": ["AGENT_ROLE"]
+    },
+    "action": {
+      "id": "deploy_artifact",
+      "type": "GovernedAction"
+    },
+    "resource": {
+      "id": "deployment:payment-api:prod",
+      "type": "GovernedResource",
+      "environment": "production"
+    },
+    "context": {
+      "risk_tier": "high",
+      "evidence_profile": "deployment_with_anchor",
+      "approval_profile": "deploy_approver_distinct",
+      "artifact_linkage": "approved_artifact_with_ledger_anchor",
+      "policy_ref_profile": "bundle_hash_present",
+      "workflow_id": "wf-p3-deploy-allow",
+      "run_id": "run-policy-version-fixture-003"
+    }
+  }
+}

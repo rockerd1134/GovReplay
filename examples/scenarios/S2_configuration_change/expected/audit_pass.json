@@ -1,0 +1,9 @@
+{
+  "schema_version": "govprov.expected_audit.v1",
+  "scenario_id": "S2_configuration_change",
+  "workflow_id": "wf-S2-P2-F0-0001",
+  "expected_verdict": "pass",
+  "expected_failure_code": null,
+  "expected_failure_stage": null,
+  "approval_expectation": "configuration approver is distinct from proposer"
+}

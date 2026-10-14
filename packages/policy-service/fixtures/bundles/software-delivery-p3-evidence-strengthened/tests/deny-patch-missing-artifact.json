@@ -1,0 +1,29 @@
+{
+  "name": "P3 denies patch proposal without artifact reference",
+  "expected_decision": "deny",
+  "input": {
+    "principal": {
+      "id": "govprov:actor:agent-patch-001",
+      "type": "Agent",
+      "roles": ["AGENT_ROLE"]
+    },
+    "action": {
+      "id": "propose_patch",
+      "type": "GovernedAction"
+    },
+    "resource": {
+      "id": "repo:payment-api:patch",
+      "type": "GovernedResource",
+      "environment": "staging"
+    },
+    "context": {
+      "risk_tier": "medium",
+      "evidence_profile": "issue_and_tests",
+      "approval_profile": "code_reviewer_distinct",
+      "artifact_linkage": "missing_patch_artifact",
+      "policy_ref_profile": "bundle_hash_present",
+      "workflow_id": "wf-p3-patch-deny",
+      "run_id": "run-policy-version-fixture-003"
+    }
+  }
+}

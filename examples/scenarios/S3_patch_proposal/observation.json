@@ -1,0 +1,8 @@
+{
+  "observation_id": "obs-S3-0001",
+  "observed_at": "2026-06-21T01:58:00Z",
+  "source": "issue-tracker",
+  "summary": "Retry helper drops the final error when the last attempt times out.",
+  "issue_id": "ISSUE-S3-0001",
+  "recommended_action": "Patch retry helper to preserve the final timeout error."
+}

@@ -1,0 +1,129 @@
+{
+  "schema_version": "govprov.obligations.v1",
+  "defaults": {
+    "decision_ttl_seconds": 120
+  },
+  "obligations": [
+    {
+      "id": "p3-runbook-strengthened-evidence",
+      "description": "Runbook update governance requires two evidence references and an active policy bundle hash.",
+      "applies_to_actions": ["propose_runbook_update"],
+      "required_evidence": {
+        "min_count": 2,
+        "evidence_types": ["incident_report", "service_log_excerpt"]
+      },
+      "required_approval_roles": ["DOC_APPROVER"],
+      "separation_of_duties": {
+        "proposer_cannot_approve": true,
+        "distinct_approval_count": 1
+      },
+      "deployment_environment_constraints": {
+        "allowed_environments": ["documentation", "staging"],
+        "forbidden_environments": ["production"]
+      },
+      "attestation_requirements": {
+        "required_attestation_types": [
+          "EvidenceBundleAttestation",
+          "ApprovalAttestation",
+          "PolicyDecisionAttestation"
+        ],
+        "policy_decision_must_include_bundle_hash": true
+      },
+      "expiration": {
+        "approval_max_age_seconds": 43200,
+        "evidence_max_age_seconds": 86400
+      }
+    },
+    {
+      "id": "p3-deployment-provenance",
+      "description": "Deployment requires approved artifact linkage, active policy hash, and ledger anchor evidence.",
+      "applies_to_actions": ["deploy_artifact"],
+      "required_evidence": {
+        "min_count": 2,
+        "evidence_types": ["deployment_request", "ledger_anchor"]
+      },
+      "required_approval_roles": ["DEPLOY_APPROVER"],
+      "separation_of_duties": {
+        "proposer_cannot_approve": true,
+        "distinct_approval_count": 1
+      },
+      "deployment_environment_constraints": {
+        "allowed_environments": ["production"],
+        "forbidden_environments": ["unregistered"]
+      },
+      "attestation_requirements": {
+        "required_attestation_types": [
+          "ArtifactAttestation",
+          "DeploymentAttestation",
+          "LedgerAnchorAttestation",
+          "PolicyDecisionAttestation"
+        ],
+        "policy_decision_must_include_bundle_hash": true
+      },
+      "expiration": {
+        "approval_max_age_seconds": 43200,
+        "evidence_max_age_seconds": 86400
+      }
+    },
+    {
+      "id": "p3-patch-provenance",
+      "description": "Patch proposals require issue evidence, test evidence, artifact reference, and active policy binding.",
+      "applies_to_actions": ["propose_patch"],
+      "required_evidence": {
+        "min_count": 2,
+        "evidence_types": ["issue", "test_report"]
+      },
+      "required_approval_roles": ["CODE_REVIEWER"],
+      "separation_of_duties": {
+        "proposer_cannot_approve": true,
+        "distinct_approval_count": 1
+      },
+      "deployment_environment_constraints": {
+        "allowed_environments": ["staging", "production"],
+        "forbidden_environments": ["unregistered"]
+      },
+      "attestation_requirements": {
+        "required_attestation_types": [
+          "EvidenceBundleAttestation",
+          "ArtifactAttestation",
+          "ApprovalAttestation",
+          "PolicyDecisionAttestation"
+        ],
+        "policy_decision_must_include_bundle_hash": true
+      },
+      "expiration": {
+        "approval_max_age_seconds": 43200,
+        "evidence_max_age_seconds": 86400
+      }
+    },
+    {
+      "id": "p3-governance-admin-state-change",
+      "description": "Governance-state changes require a governance-admin actor and policy-bound change evidence.",
+      "applies_to_actions": ["request_governance_state_change"],
+      "required_evidence": {
+        "min_count": 1,
+        "evidence_types": ["governance_change_request"]
+      },
+      "required_approval_roles": ["GOVERNANCE_ADMIN"],
+      "separation_of_duties": {
+        "proposer_cannot_approve": false,
+        "distinct_approval_count": 1
+      },
+      "deployment_environment_constraints": {
+        "allowed_environments": ["governance"],
+        "forbidden_environments": ["production", "unregistered"]
+      },
+      "attestation_requirements": {
+        "required_attestation_types": [
+          "PolicyDecisionAttestation",
+          "LedgerAnchorAttestation"
+        ],
+        "policy_decision_must_include_bundle_hash": true
+      },
+      "expiration": {
+        "approval_max_age_seconds": 43200,
+        "evidence_max_age_seconds": 86400
+      }
+    }
+  ]
+}

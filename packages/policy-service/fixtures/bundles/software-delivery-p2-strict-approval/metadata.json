@@ -1,0 +1,11 @@
+{
+  "policy_bundle_id": "software-delivery-governance",
+  "version": "2.0.0",
+  "created_at": "2026-06-20T00:00:00Z",
+  "author": "govprov:actor:policy-admin-001",
+  "parent_policy_bundle_hash": "0xee5bf73acae02c902248d4df2ea4eeaa049ea70b6c785446f55e70faa37e9634",
+  "description": "P2 stricter approval governance policy with separation-of-duties and dual approval fixtures.",
+  "compatible_contract_set": "govprov-contracts:v0.1",
+  "policy_language": "cedar",
+  "schema_version": "govprov.policy_bundle.v1"
+}

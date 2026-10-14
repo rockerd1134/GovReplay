@@ -1,0 +1,201 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://govreplay.local/schemas/contract-addresses.schema.json",
+  "title": "GovReplay Contract Addresses Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "chain",
+    "build",
+    "contract_set_id",
+    "governance_admin",
+    "active_scopes",
+    "active_policies",
+    "contracts"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "govprov.contract-addresses.v1"
+    },
+    "chain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "chain_id",
+        "network",
+        "genesis_hash",
+        "rpc_endpoint_hash"
+      ],
+      "properties": {
+        "chain_id": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "network": {
+          "type": "string",
+          "minLength": 1
+        },
+        "genesis_hash": {
+          "$ref": "#/$defs/bytes32"
+        },
+        "rpc_endpoint_hash": {
+          "$ref": "#/$defs/bytes32"
+        }
+      }
+    },
+    "build": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "generated_at",
+        "tool",
+        "solc_version",
+        "manifest_kind"
+      ],
+      "properties": {
+        "generated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "tool": {
+          "type": "string",
+          "minLength": 1
+        },
+        "solc_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "manifest_kind": {
+          "enum": [
+            "synthetic-fixture",
+            "deployment"
+          ]
+        },
+        "git_commit_hash": {
+          "$ref": "#/$defs/bytes32"
+        }
+      }
+    },
+    "contract_set_id": {
+      "$ref": "#/$defs/bytes32"
+    },
+    "governance_admin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "address",
+        "actor_id_hash"
+      ],
+      "properties": {
+        "address": {
+          "$ref": "#/$defs/address"
+        },
+        "actor_id_hash": {
+          "$ref": "#/$defs/bytes32"
+        }
+      }
+    },
+    "active_scopes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "scope_hash",
+          "metadata_hash"
+        ],
+        "properties": {
+          "scope_hash": {
+            "$ref": "#/$defs/bytes32"
+          },
+          "metadata_hash": {
+            "$ref": "#/$defs/bytes32"
+          }
+        }
+      }
+    },
+    "active_policies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "scope_hash",
+          "policy_hash",
+          "metadata_hash"
+        ],
+        "properties": {
+          "scope_hash": {
+            "$ref": "#/$defs/bytes32"
+          },
+          "policy_hash": {
+            "$ref": "#/$defs/bytes32"
+          },
+          "metadata_hash": {
+            "$ref": "#/$defs/bytes32"
+          }
+        }
+      }
+    },
+    "contracts": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/contract_record"
+      },
+      "required": [
+        "ActorRegistry",
+        "PolicyRegistry",
+        "ProvenanceRegistry",
+        "ApprovalRegistry",
+        "DeploymentRegistry",
+        "ContractDirectory"
+      ]
+    }
+  },
+  "$defs": {
+    "address": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{40}$"
+    },
+    "bytes32": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{64}$"
+    },
+    "contract_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "address",
+        "name_hash",
+        "version_hash",
+        "source_hash",
+        "abi_hash",
+        "metadata_hash"
+      ],
+      "properties": {
+        "address": {
+          "$ref": "#/$defs/address"
+        },
+        "name_hash": {
+          "$ref": "#/$defs/bytes32"
+        },
+        "version_hash": {
+          "$ref": "#/$defs/bytes32"
+        },
+        "source_hash": {
+          "$ref": "#/$defs/bytes32"
+        },
+        "abi_hash": {
+          "$ref": "#/$defs/bytes32"
+        },
+        "metadata_hash": {
+          "$ref": "#/$defs/bytes32"
+        },
+        "source_path_hash": {
+          "$ref": "#/$defs/bytes32"
+        }
+      }
+    }
+  }
+}

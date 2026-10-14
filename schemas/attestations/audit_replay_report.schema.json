@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://govprov.dev/schemas/attestations/audit_replay_report.schema.json",
+  "title": "AuditReplayReport",
+  "allOf": [
+    { "$ref": "./common.schema.json" },
+    {
+      "type": "object",
+      "properties": {
+        "attestation_type": { "const": "AuditReplayReport" },
+        "predicate_type": { "const": "https://govprov.dev/predicate/audit-replay-report/v1" },
+        "predicate": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["audit_result", "failure_codes", "replay_duration_ms", "governance_domain", "governance_domain_type", "governance_domain_id"],
+          "properties": {
+            "audit_result": { "enum": ["pass", "fail", "incomplete"] },
+            "failure_codes": { "type": "array", "items": { "type": "string" } },
+            "replay_duration_ms": { "type": "string", "pattern": "^[0-9]+$" },
+            "governance_domain": { "$ref": "./common.schema.json#/$defs/governanceDomain" },
+            "governance_domain_type": { "type": "string", "minLength": 1 },
+            "governance_domain_id": { "type": "string", "pattern": "^govreplay:domain:[a-z_]+$" }
+          }
+        }
+      }
+    }
+  ]
+}

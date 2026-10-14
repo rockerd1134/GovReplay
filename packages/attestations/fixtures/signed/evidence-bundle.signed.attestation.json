@@ -1,0 +1,60 @@
+{
+  "_type": "https://govprov.dev/attestation/v1",
+  "schema_version": "govprov.attestation.v1",
+  "attestation_type": "EvidenceBundleAttestation",
+  "predicate_type": "https://govprov.dev/predicate/evidence-bundle/v1",
+  "subject": [
+    {
+      "name": "evidence-bundle-1001",
+      "digest": {
+        "algorithm": "sha256",
+        "value": "0x0b0b291eae422de2ec544e45e8c661b5c96063f624b454c90ccb6a604db1fe70"
+      },
+      "uri": "cas://sha256/0b0b291eae422de2ec544e45e8c661b5c96063f624b454c90ccb6a604db1fe70"
+    }
+  ],
+  "parents": [
+    "0x316f52194a77bb724a1c4a560bcb48658e4ad15d8c242f6645c2f23211fadcf3"
+  ],
+  "created_at": "2026-06-20T00:01:00Z",
+  "created_by": {
+    "actor_id": "govprov:actor:agent-alpha",
+    "actor_type": "agent",
+    "ethereum_address": "0x2b5ad5c4795c026514f8317c7a215e218dccd6cf"
+  },
+  "governance_domain": "audit_domain",
+  "governance_domain_type": "audit_replay_reports_and_metrics",
+  "governance_domain_id": "govreplay:domain:audit_domain",
+  "policy": {
+    "policy_id": "govprov:policy:delivery-v1",
+    "policy_hash": "0x2222222222222222222222222222222222222222222222222222222222222222",
+    "scope_hash": "0x3333333333333333333333333333333333333333333333333333333333333333"
+  },
+  "predicate": {
+    "evidence_count": "2",
+    "evidence": [
+      {
+        "name": "unit-test-report",
+        "digest": {
+          "algorithm": "sha256",
+          "value": "0xd8ec5f3fa2125c398cd85950e38e3e9216f68a46e97828843bc2a3f2073b3882"
+        },
+        "uri": "cas://sha256/5555555555555555555555555555555555555555555555555555555555555555"
+      },
+      {
+        "name": "incident-summary",
+        "digest": {
+          "algorithm": "sha256",
+          "value": "0x32907ed80147a940e582b446a21501e2a14c109409ad47ac91da262edb8eec43"
+        },
+        "uri": "cas://sha256/6666666666666666666666666666666666666666666666666666666666666666"
+      }
+    ]
+  },
+  "attestation_hash": "0xda9aabec00a30993efe65be811cf61aea76f978bd320a9649e3f81062da14f9c",
+  "signature": {
+    "profile": "govprov-ethsign-secp256k1-v1",
+    "signature": "0x1f3927d79a778c4742aa0f91087046b6dcd89a0ab3ea9122be8cd8c9f078af327d61e770a7d893fd75fcb8931cba217a32fcd62ceef5d0ff8048cb679df6a4f41c",
+    "signer": "0x2b5ad5c4795c026514f8317c7a215e218dccd6cf"
+  }
+}

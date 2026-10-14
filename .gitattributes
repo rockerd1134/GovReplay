@@ -1,0 +1,4 @@
+*.sh text eol=lf
+contracts/foundry-deps.lock text eol=lf
+contracts/remappings.txt text eol=lf
+packages/experiments/temporal-ordering/release/frozen-predictions.json -text

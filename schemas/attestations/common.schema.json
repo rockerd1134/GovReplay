@@ -1,0 +1,192 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://govprov.dev/schemas/attestations/common.schema.json",
+  "title": "GovReplay Common Attestation Envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "_type",
+    "schema_version",
+    "attestation_type",
+    "predicate_type",
+    "subject",
+    "parents",
+    "created_at",
+    "created_by",
+    "governance_domain",
+    "governance_domain_type",
+    "governance_domain_id",
+    "policy",
+    "predicate"
+  ],
+  "properties": {
+    "_type": {
+      "const": "https://govprov.dev/attestation/v1"
+    },
+    "schema_version": {
+      "const": "govprov.attestation.v1"
+    },
+    "attestation_type": {
+      "$ref": "#/$defs/attestationType"
+    },
+    "attestation_hash": {
+      "$ref": "#/$defs/bytes32"
+    },
+    "predicate_type": {
+      "type": "string",
+      "pattern": "^https://govprov\\.dev/predicate/[a-z0-9-]+/v1$"
+    },
+    "subject": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/subject"
+      }
+    },
+    "parents": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/bytes32"
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "created_by": {
+      "$ref": "#/$defs/actor"
+    },
+    "governance_domain": {
+      "$ref": "#/$defs/governanceDomain"
+    },
+    "governance_domain_type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "governance_domain_id": {
+      "type": "string",
+      "pattern": "^govreplay:domain:[a-z_]+$"
+    },
+    "policy": {
+      "$ref": "#/$defs/policyRef"
+    },
+    "predicate": {
+      "type": "object"
+    },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["profile", "signature", "signer"],
+      "properties": {
+        "profile": {
+          "const": "govprov-ethsign-secp256k1-v1"
+        },
+        "signature": {
+          "type": "string",
+          "pattern": "^0x[0-9a-f]{130}$"
+        },
+        "signer": {
+          "$ref": "#/$defs/ethereumAddress"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "attestationType": {
+      "enum": [
+        "ObservationAttestation",
+        "EvidenceBundleAttestation",
+        "PolicyDecisionAttestation",
+        "AgentActionAttestation",
+        "ApprovalAttestation",
+        "ArtifactAttestation",
+        "DeploymentAttestation",
+        "LedgerAnchorAttestation",
+        "AuditReplayReport"
+      ]
+    },
+    "bytes32": {
+      "type": "string",
+      "pattern": "^0x[0-9a-f]{64}$"
+    },
+    "digest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "value"],
+      "properties": {
+        "algorithm": {
+          "enum": ["sha256", "keccak256"]
+        },
+        "value": {
+          "$ref": "#/$defs/bytes32"
+        }
+      }
+    },
+    "ethereumAddress": {
+      "type": "string",
+      "pattern": "^0x[0-9a-fA-F]{40}$"
+    },
+    "governanceDomain": {
+      "enum": [
+        "identity_domain",
+        "policy_domain",
+        "approval_domain",
+        "deployment_domain",
+        "anchor_domain",
+        "contract_domain",
+        "audit_domain"
+      ]
+    },
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["actor_id", "actor_type", "ethereum_address"],
+      "properties": {
+        "actor_id": {
+          "type": "string",
+          "pattern": "^govprov:actor:[a-z0-9-]+$"
+        },
+        "actor_type": {
+          "enum": ["agent", "human", "service"]
+        },
+        "ethereum_address": {
+          "$ref": "#/$defs/ethereumAddress"
+        }
+      }
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "digest"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "uri": {
+          "type": "string"
+        }
+      }
+    },
+    "policyRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["policy_id", "policy_hash", "scope_hash"],
+      "properties": {
+        "policy_id": {
+          "type": "string",
+          "pattern": "^govprov:policy:[a-z0-9-]+$"
+        },
+        "policy_hash": {
+          "$ref": "#/$defs/bytes32"
+        },
+        "scope_hash": {
+          "$ref": "#/$defs/bytes32"
+        }
+      }
+    }
+  }
+}

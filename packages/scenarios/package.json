@@ -1,0 +1,14 @@
+{
+  "name": "@govprov/scenarios",
+  "private": true,
+  "license": "Apache-2.0",
+  "type": "module",
+  "description": "GovReplay deterministic scenario manifest fixtures.",
+  "scripts": {
+    "run:s1-local": "node --experimental-strip-types src/s1-local-runner.ts",
+    "run:s2-local": "node --experimental-strip-types src/s2-local-runner.ts",
+    "run:s3-local": "node --experimental-strip-types src/s3-local-runner.ts",
+    "run:s4-local": "node --experimental-strip-types src/s4-local-runner.ts",
+    "test": "node --test --experimental-strip-types test/*.test.ts"
+  }
+}

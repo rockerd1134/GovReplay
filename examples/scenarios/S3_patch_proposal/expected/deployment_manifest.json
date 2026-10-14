@@ -1,0 +1,8 @@
+{
+  "deployment_id": "deployment-S3-0001",
+  "deployment_type": "stage_patch",
+  "environment": "staging",
+  "resource_id": "services/payment-api/retry.ts",
+  "artifact_id": "artifact-S3-0001",
+  "status": "ready_for_staging"
+}

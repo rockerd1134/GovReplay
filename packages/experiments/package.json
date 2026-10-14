@@ -1,0 +1,21 @@
+{
+  "name": "@govprov/experiments",
+  "version": "0.1.0",
+  "private": true,
+  "license": "Apache-2.0",
+  "type": "module",
+  "description": "GovReplay Audit Replay under Policy Evolution (ARPE) experiment runner, workload generator, and metrics aggregator.",
+  "scripts": {
+    "test": "node --test --experimental-strip-types test/*.test.ts",
+    "test:temporal": "node --test --experimental-strip-types temporal-ordering/test/*.test.ts",
+    "result-provenance-gate": "node --experimental-strip-types src/resultProvenanceGate.ts",
+    "run:debug": "node --experimental-strip-types src/cli.ts --config configs/debug.json",
+    "run:basic-debug": "node --experimental-strip-types src/cli.ts --config configs/arpe_basic_debug.json",
+    "run:basic": "node --experimental-strip-types src/cli.ts --config configs/arpe_basic_matrix.json",
+    "run:hard-debug": "node --experimental-strip-types src/cli.ts --config configs/arpe_hard_debug.json",
+    "run:minimum": "node --experimental-strip-types src/cli.ts --config configs/minimum.json"
+  },
+  "engines": {
+    "node": ">=22.6"
+  }
+}

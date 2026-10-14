@@ -1,0 +1,10 @@
+resource: services/payment-api/config.yaml
+change_id: cfg-S2-0001
+changes:
+  request_timeout_ms:
+    before: 1500
+    after: 2500
+risk: high
+requires:
+  - CONFIG_APPROVER
+  - separation_of_duties

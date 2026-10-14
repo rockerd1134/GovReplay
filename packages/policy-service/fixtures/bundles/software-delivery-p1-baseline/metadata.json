@@ -1,0 +1,11 @@
+{
+  "policy_bundle_id": "software-delivery-governance",
+  "version": "1.0.0",
+  "created_at": "2026-06-20T00:00:00Z",
+  "author": "govprov:actor:policy-admin-001",
+  "parent_policy_bundle_hash": null,
+  "description": "P1 baseline governance policy for deterministic software delivery fixtures.",
+  "compatible_contract_set": "govprov-contracts:v0.1",
+  "policy_language": "cedar",
+  "schema_version": "govprov.policy_bundle.v1"
+}

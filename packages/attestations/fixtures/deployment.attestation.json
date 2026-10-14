@@ -1,0 +1,36 @@
+{
+  "_type": "https://govprov.dev/attestation/v1",
+  "schema_version": "govprov.attestation.v1",
+  "attestation_type": "DeploymentAttestation",
+  "predicate_type": "https://govprov.dev/predicate/deployment/v1",
+  "subject": [
+    {
+      "name": "deployment-1001",
+      "digest": {
+        "algorithm": "sha256",
+        "value": "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+      }
+    }
+  ],
+  "parents": [
+    "0x9999999999999999999999999999999999999999999999999999999999999999",
+    "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+  ],
+  "created_at": "2026-06-20T00:06:00Z",
+  "created_by": {
+    "actor_id": "govprov:actor:deployer",
+    "actor_type": "human",
+    "ethereum_address": "0xf17f52151EbEF6C7334FAD080c5704D77216b732"
+  },
+  "policy": {
+    "policy_id": "govprov:policy:delivery-v1",
+    "policy_hash": "0x2222222222222222222222222222222222222222222222222222222222222222",
+    "scope_hash": "0x3333333333333333333333333333333333333333333333333333333333333333"
+  },
+  "predicate": {
+    "deployment_id": "dep-1001",
+    "environment": "staging",
+    "artifact_hash": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "approval_hash": "0x9999999999999999999999999999999999999999999999999999999999999999"
+  }
+}

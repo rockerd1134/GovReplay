@@ -1,0 +1,29 @@
+{
+  "name": "P3 allows runbook update with strengthened evidence and active policy hash",
+  "expected_decision": "allow",
+  "input": {
+    "principal": {
+      "id": "govprov:actor:agent-runbook-001",
+      "type": "Agent",
+      "roles": ["AGENT_ROLE"]
+    },
+    "action": {
+      "id": "propose_runbook_update",
+      "type": "GovernedAction"
+    },
+    "resource": {
+      "id": "runbook:cache-timeout-remediation",
+      "type": "GovernedResource",
+      "environment": "documentation"
+    },
+    "context": {
+      "risk_tier": "low",
+      "evidence_profile": "strengthened",
+      "approval_profile": "single_doc_approver",
+      "artifact_linkage": "unverified",
+      "policy_ref_profile": "bundle_hash_present",
+      "workflow_id": "wf-p3-runbook-allow",
+      "run_id": "run-policy-version-fixture-003"
+    }
+  }
+}

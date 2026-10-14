@@ -1,0 +1,7 @@
+{
+  "observation_id": "obs-S1-0001",
+  "observed_at": "2026-06-20T00:00:00Z",
+  "reported_by": "monitor.cache_timeout",
+  "summary": "The payment API experienced repeated timeout errors after deploy because the remediation runbook omitted a cache warmup validation step.",
+  "affected_resource": "runbooks/cache-timeout-remediation.md"
+}

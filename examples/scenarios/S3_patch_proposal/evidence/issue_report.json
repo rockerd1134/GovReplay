@@ -1,0 +1,7 @@
+{
+  "issue_id": "ISSUE-S3-0001",
+  "component": "payment-api retry helper",
+  "symptom": "Final timeout is hidden by a generic retry exhaustion error.",
+  "severity": "medium",
+  "reproduction": "Force all retry attempts to timeout."
+}

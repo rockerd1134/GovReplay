@@ -1,0 +1,68 @@
+{
+  "schema_version": "govprov.obligations.v1",
+  "defaults": {
+    "decision_ttl_seconds": 300
+  },
+  "obligations": [
+    {
+      "id": "p1-runbook-baseline",
+      "description": "Baseline runbook update governance with one evidence item and one documentation approval.",
+      "applies_to_actions": ["propose_runbook_update"],
+      "required_evidence": {
+        "min_count": 1,
+        "evidence_types": ["incident_report"]
+      },
+      "required_approval_roles": ["DOC_APPROVER"],
+      "separation_of_duties": {
+        "proposer_cannot_approve": true,
+        "distinct_approval_count": 1
+      },
+      "deployment_environment_constraints": {
+        "allowed_environments": ["documentation", "staging"],
+        "forbidden_environments": ["production"]
+      },
+      "attestation_requirements": {
+        "required_attestation_types": [
+          "EvidenceBundleAttestation",
+          "ApprovalAttestation",
+          "PolicyDecisionAttestation"
+        ],
+        "policy_decision_must_include_bundle_hash": true
+      },
+      "expiration": {
+        "approval_max_age_seconds": 86400,
+        "evidence_max_age_seconds": 604800
+      }
+    },
+    {
+      "id": "p1-config-single-approval",
+      "description": "Baseline configuration change governance with one configuration approver.",
+      "applies_to_actions": ["propose_config_change"],
+      "required_evidence": {
+        "min_count": 1,
+        "evidence_types": ["alert_summary"]
+      },
+      "required_approval_roles": ["CONFIG_APPROVER"],
+      "separation_of_duties": {
+        "proposer_cannot_approve": true,
+        "distinct_approval_count": 1
+      },
+      "deployment_environment_constraints": {
+        "allowed_environments": ["staging"],
+        "forbidden_environments": ["production"]
+      },
+      "attestation_requirements": {
+        "required_attestation_types": [
+          "EvidenceBundleAttestation",
+          "ApprovalAttestation",
+          "PolicyDecisionAttestation"
+        ],
+        "policy_decision_must_include_bundle_hash": true
+      },
+      "expiration": {
+        "approval_max_age_seconds": 86400,
+        "evidence_max_age_seconds": 604800
+      }
+    }
+  ]
+}

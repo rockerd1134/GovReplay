@@ -1,0 +1,41 @@
+{
+  "run_id": "phase7-minimum",
+  "matrix": "minimum_publishable",
+  "system_configurations": [
+    "baseline_structured_logs",
+    "baseline_signed_merkle_log",
+    "govreplay_offchain_only",
+    "SEGL",
+    "govreplay_besu"
+  ],
+  "scenarios": [
+    "S1_runbook_update",
+    "S2_configuration_change",
+    "S3_patch_proposal",
+    "S4_policy_gated_deployment"
+  ],
+  "policy_versions": [
+    "policy:v1",
+    "policy:v2",
+    "policy:v3"
+  ],
+  "fault_ids": [
+    "F0",
+    "F1",
+    "F2",
+    "F3",
+    "F5",
+    "F6",
+    "F8",
+    "F10",
+    "F12"
+  ],
+  "seeds": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "current_policy_version": "policy:v3"
+}

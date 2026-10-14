@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://govprov.dev/schemas/attestations/agent_action.schema.json",
+  "title": "AgentActionAttestation",
+  "allOf": [
+    { "$ref": "./common.schema.json" },
+    {
+      "type": "object",
+      "properties": {
+        "attestation_type": { "const": "AgentActionAttestation" },
+        "predicate_type": { "const": "https://govprov.dev/predicate/agent-action/v1" },
+        "predicate": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["action_id", "action_type", "risk"],
+          "properties": {
+            "action_id": { "type": "string" },
+            "action_type": { "type": "string" },
+            "risk": { "enum": ["low", "medium", "high"] }
+          }
+        }
+      }
+    }
+  ]
+}

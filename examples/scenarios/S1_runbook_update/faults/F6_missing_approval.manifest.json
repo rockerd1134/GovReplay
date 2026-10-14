@@ -1,0 +1,17 @@
+{
+  "schema_version": "govprov.scenario_manifest.v1",
+  "scenario_id": "S1_runbook_update",
+  "scenario_name": "Runbook Update",
+  "workflow_id": "wf-S1-P1-F6-0001",
+  "policy_version": "P1",
+  "fault_id": "F6",
+  "mode": "signed_offchain",
+  "expected_verdict": "fail",
+  "expected_failure_code": "approval_missing",
+  "expected_failure_stage": "approval",
+  "expected_historical_compliance": "fail",
+  "expected_current_compliance": "fail",
+  "primary_actor_id": "agent.runbook_author",
+  "resource_id": "runbooks/cache-timeout-remediation.md",
+  "created_at": "2026-06-20T00:00:00Z"
+}

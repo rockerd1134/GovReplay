@@ -1,0 +1,11 @@
+{
+  "policy_bundle_id": "software-delivery-governance",
+  "version": "3.0.0",
+  "created_at": "2026-06-20T00:00:00Z",
+  "author": "govprov:actor:policy-admin-001",
+  "parent_policy_bundle_hash": "0xfdf5b9a443ca62b5e0bf333bb0e6a150b19bf724c68aaa34a9c12edfa2901422",
+  "description": "P3 evidence-strengthened governance policy with active policy refs and deployment provenance fixtures.",
+  "compatible_contract_set": "govprov-contracts:v0.1",
+  "policy_language": "cedar",
+  "schema_version": "govprov.policy_bundle.v1"
+}

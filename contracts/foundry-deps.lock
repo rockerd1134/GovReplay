@@ -1,0 +1,4 @@
+# Declarative Foundry dependency pins for the containerized validation path.
+# Format: <name> <git-url> <tag> <target-dir>
+forge-std https://github.com/foundry-rs/forge-std.git v1.9.6 lib/forge-std
+openzeppelin-contracts https://github.com/OpenZeppelin/openzeppelin-contracts.git v5.0.2 lib/openzeppelin-contracts

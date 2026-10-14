@@ -1,0 +1,116 @@
+{
+  "_type": "https://govprov.dev/attestation/v1",
+  "schema_version": "govprov.attestation.v1",
+  "attestation_type": "PolicyDecisionAttestation",
+  "predicate_type": "https://govprov.dev/predicate/policy-decision/v1",
+  "subject": [
+    {
+      "name": "policy-decision/software-delivery-p3-evidence-strengthened/deny-governance-non-admin.json",
+      "digest": {
+        "algorithm": "sha256",
+        "value": "0xbfc39062cb91eca4c7fb1e3cf21bf81608f3ae8dc104c7303e187123ed39cd46"
+      },
+      "uri": "cas://sha256/bfc39062cb91eca4c7fb1e3cf21bf81608f3ae8dc104c7303e187123ed39cd46"
+    }
+  ],
+  "parents": [],
+  "created_at": "2026-06-20T00:00:00Z",
+  "created_by": {
+    "actor_id": "govprov:actor:policy-service",
+    "actor_type": "service",
+    "ethereum_address": "0x6813eb9362372eef6200f3b1dbc3f819671cba69"
+  },
+  "policy": {
+    "policy_id": "software-delivery-governance",
+    "policy_hash": "0xd113b711e9b1e7136c1b1c6a3ef802d690c6f3e86931404375870402924cd36b",
+    "scope_hash": "0x89ee0a27b9f7ab9a14818608e238838547ce678a13de00ec4c8ced6922999732"
+  },
+  "predicate": {
+    "workflow_id": "wf-p3-governance-deny",
+    "run_id": "run-policy-version-fixture-003",
+    "evaluated_at": "2026-06-20T00:00:00Z",
+    "policy_service_run_id": "govreplay:policy-evaluator:cedar-subset",
+    "evaluator_identity": "govreplay:policy-evaluator:cedar-subset",
+    "evaluator_version": "cedar-policy-4.11.1-compatible-ts-subset.v1",
+    "evaluator_policy_language": "cedar",
+    "matched_policy_ids": [],
+    "policy": {
+      "policy_id": "software-delivery-governance",
+      "policy_version": "3.0.0",
+      "policy_bundle_version": "3.0.0",
+      "policy_hash": {
+        "algorithm": "sha256",
+        "value": "0xd113b711e9b1e7136c1b1c6a3ef802d690c6f3e86931404375870402924cd36b"
+      },
+      "parent_policy_bundle_hash": "0xfdf5b9a443ca62b5e0bf333bb0e6a150b19bf724c68aaa34a9c12edfa2901422",
+      "policy_bundle_uri": "cas://sha256/d113b711e9b1e7136c1b1c6a3ef802d690c6f3e86931404375870402924cd36b",
+      "policy_engine": "cedar",
+      "policy_engine_version": "cedar-policy-4.11.1"
+    },
+    "action_id": "request_governance_state_change",
+    "decision": "deny",
+    "policy_bundle_hash": "0xd113b711e9b1e7136c1b1c6a3ef802d690c6f3e86931404375870402924cd36b",
+    "policy_bundle_version": "3.0.0",
+    "policy_input_hash": "0x91975856eccf237f70909b019bd65859c65909e0fa289061d58f2c337398e0d8",
+    "policy_input_digest": {
+      "algorithm": "sha256",
+      "value": "0x91975856eccf237f70909b019bd65859c65909e0fa289061d58f2c337398e0d8"
+    },
+    "obligations_hash": "0xe8b7c6af5d1bba0f6265e20ab3e9950d70538a369b6f13fb7207afc44310aa83",
+    "obligation_ids": [
+      "p3-governance-admin-state-change"
+    ],
+    "resolved_obligations": [
+      {
+        "schema_version": "govprov.resolved_obligation.v1",
+        "id": "p3-governance-admin-state-change",
+        "policy_bundle_hash": "0xd113b711e9b1e7136c1b1c6a3ef802d690c6f3e86931404375870402924cd36b",
+        "action_id": "request_governance_state_change",
+        "resource_environment": "governance",
+        "decision_ttl_seconds": 120,
+        "categories": {
+          "required_evidence": {
+            "min_count": 1,
+            "evidence_types": [
+              "governance_change_request"
+            ]
+          },
+          "required_approval_roles": [
+            "GOVERNANCE_ADMIN"
+          ],
+          "separation_of_duties": {
+            "proposer_cannot_approve": false,
+            "distinct_approval_count": 1
+          },
+          "deployment_environment_constraints": {
+            "allowed_environments": [
+              "governance"
+            ],
+            "forbidden_environments": [
+              "production",
+              "unregistered"
+            ]
+          },
+          "attestation_requirements": {
+            "required_attestation_types": [
+              "PolicyDecisionAttestation",
+              "LedgerAnchorAttestation"
+            ],
+            "policy_decision_must_include_bundle_hash": true
+          },
+          "expiration": {
+            "approval_max_age_seconds": 43200,
+            "evidence_max_age_seconds": 86400
+          }
+        }
+      }
+    ],
+    "policy_decision_hash": "0x1d40a4fa914a0dfbd5032c9726c93071c2690af9dcb750454a9cad1074e66afd"
+  },
+  "attestation_hash": "0xe741dcf5655b3d168cea5af85b6c8a5a976424ffb08abc4e6c0ed0a45ee57b60",
+  "signature": {
+    "profile": "govprov-ethsign-secp256k1-v1",
+    "signature": "0x614a0fd8318e99d1e8c9864b2770ba47155800542da35d74b10baeed833f03dc10d4ecda47f64941469498fe12686b0712a3133e77cb265c5639f700763b3e0f1b",
+    "signer": "0x6813eb9362372eef6200f3b1dbc3f819671cba69"
+  }
+}

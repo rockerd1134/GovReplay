@@ -1,0 +1,6 @@
+{
+  "ticket_id": "SUP-S1-0001",
+  "created_at": "2026-06-20T00:05:00Z",
+  "summary": "Customer reports recurring payment API timeouts after cache timeout remediation.",
+  "linked_resource": "runbooks/cache-timeout-remediation.md"
+}

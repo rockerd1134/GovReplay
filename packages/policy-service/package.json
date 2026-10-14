@@ -1,0 +1,16 @@
+{
+  "name": "@govprov/policy-service",
+  "version": "0.1.0",
+  "private": true,
+  "license": "Apache-2.0",
+  "type": "module",
+  "description": "GovReplay deterministic policy bundle format and validation helpers.",
+  "scripts": {
+    "generate:policy-decision-fixtures": "node --experimental-strip-types src/policy-decision-attestation.ts --write",
+    "generate:policy-drift-fixtures": "node --experimental-strip-types src/policy-drift-fixtures.ts --write",
+    "test": "node --test --experimental-strip-types test/*.test.ts"
+  },
+  "engines": {
+    "node": ">=22.6"
+  }
+}

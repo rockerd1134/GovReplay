@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://govprov.dev/schemas/attestations/observation.schema.json",
+  "title": "ObservationAttestation",
+  "allOf": [
+    { "$ref": "./common.schema.json" },
+    {
+      "type": "object",
+      "properties": {
+        "attestation_type": { "const": "ObservationAttestation" },
+        "predicate_type": { "const": "https://govprov.dev/predicate/observation/v1" },
+        "predicate": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["observation_id", "source", "request_summary"],
+          "properties": {
+            "observation_id": { "type": "string" },
+            "source": { "type": "string" },
+            "request_summary": { "type": "string" }
+          }
+        }
+      }
+    }
+  ]
+}

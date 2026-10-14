@@ -1,0 +1,12 @@
+{
+  "test_report_id": "test-S3-0001",
+  "suite": "payment-api retry helper",
+  "status": "passed",
+  "tests": [
+    {
+      "name": "preserves final timeout error",
+      "status": "passed"
+    }
+  ],
+  "patch_ref": "input/retry_edge_case.patch"
+}

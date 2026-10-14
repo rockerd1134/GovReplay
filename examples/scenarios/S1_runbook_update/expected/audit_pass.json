@@ -1,0 +1,8 @@
+{
+  "schema_version": "govprov.audit_expectation.v1",
+  "scenario_id": "S1_runbook_update",
+  "workflow_id": "wf-S1-P1-F0-0001",
+  "expected_verdict": "pass",
+  "expected_historical_compliance": "pass",
+  "expected_current_compliance": "pass"
+}

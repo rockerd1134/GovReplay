@@ -1,0 +1,37 @@
+{
+  "run_id": "arpe-hash-only-ablation-hard-debug",
+  "matrix": "arpe_hard_matrix",
+  "system_configurations": [
+    "baseline_structured_logs",
+    "govreplay_offchain_only",
+    "SEGL",
+    "baseline_hash_only_ledger",
+    "govreplay_besu"
+  ],
+  "scenarios": [
+    "S1_runbook_update",
+    "S2_configuration_change",
+    "S3_patch_proposal",
+    "S4_policy_gated_deployment"
+  ],
+  "policy_versions": [
+    "policy:v1",
+    "policy:v2"
+  ],
+  "fault_ids": [
+    "F0",
+    "H1",
+    "H2",
+    "H3",
+    "H4",
+    "H5",
+    "H6",
+    "H7",
+    "H8"
+  ],
+  "seeds": [
+    11,
+    12
+  ],
+  "current_policy_version": "policy:v3"
+}

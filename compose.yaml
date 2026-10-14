@@ -1,0 +1,478 @@
+services:
+  foundry:
+    image: ghcr.io/foundry-rs/foundry:v1.0.0
+    user: "0:0"
+    working_dir: /workspace/contracts
+    volumes:
+      - .:/workspace
+    entrypoint: ["/bin/sh", "./scripts/foundry-entrypoint.sh"]
+    command: ["forge", "test"]
+
+  attestations-test:
+    image: node:24.2.0-alpine
+    working_dir: /workspace/packages/attestations
+    volumes:
+      - .:/workspace
+    command: ["sh", "-c", "node --test --experimental-strip-types test/*.test.ts"]
+
+  policy-bundle-test:
+    image: node:24.2.0-alpine
+    working_dir: /workspace/packages/policy-service
+    volumes:
+      - .:/workspace
+    command: ["sh", "-c", "node --test --experimental-strip-types test/*.test.ts"]
+
+  policy-service-test:
+    image: rust:1.89.0-slim-bookworm
+    working_dir: /workspace/packages/policy-service
+    volumes:
+      - .:/workspace
+    environment:
+      CARGO_HOME: /workspace/.tmp/cargo-home
+    command: ["cargo", "test", "--locked"]
+
+  gateway-test:
+    image: node:24.2.0-alpine
+    working_dir: /workspace/packages/gateway
+    volumes:
+      - .:/workspace
+    command: ["sh", "-c", "node --test --experimental-strip-types test/*.test.ts && node bin/govreplay-gateway.mjs check --request fixtures/s1-runbook-allow.request.json --out ../../runs/gateway-smoke/allow-decision.json && node bin/govreplay-gateway.mjs check --request fixtures/s1-runbook-deny.request.json --out ../../runs/gateway-smoke/deny-decision.json && node --experimental-strip-types src/example-agent-client.ts --request fixtures/s1-runbook-allow.request.json --out ../../runs/gateway-smoke/allow-client && node --experimental-strip-types src/example-agent-client.ts --request fixtures/s1-runbook-deny.request.json --out ../../runs/gateway-smoke/deny-client"]
+
+  scenario-manifest-test:
+    image: node:24.2.0-alpine
+    working_dir: /workspace/packages/scenarios
+    volumes:
+      - .:/workspace
+    command: ["sh", "-c", "node --test --experimental-strip-types test/*.test.ts"]
+
+  scenario-runner-test:
+    image: node:24.2.0-alpine
+    working_dir: /workspace/packages/scenarios
+    volumes:
+      - .:/workspace
+    command: ["sh", "-c", "node --test --experimental-strip-types test/*.test.ts && node --experimental-strip-types src/s1-local-runner.ts && node --experimental-strip-types src/s2-local-runner.ts && node --experimental-strip-types src/s3-local-runner.ts && node --experimental-strip-types src/s4-local-runner.ts"]
+
+  scenario-ui-fixture-test:
+    image: node:24.2.0-alpine
+    working_dir: /workspace/packages/scenarios
+    volumes:
+      - .:/workspace
+    command: ["sh", "-c", "node --test --experimental-strip-types test/ui-fixtures.test.ts && node --experimental-strip-types src/ui-fixtures.ts"]
+
+  audit-replay-test:
+    image: node:24.2.0-alpine
+    working_dir: /workspace/packages/audit-replay
+    volumes:
+      - .:/workspace
+    command: ["sh", "-c", "node --test --experimental-strip-types test/*.test.ts"]
+
+  experiment-runner-test:
+    image: node:24.2.0-alpine
+    working_dir: /workspace/packages/experiments
+    volumes:
+      - .:/workspace
+    command: ["sh", "-c", "node --test --experimental-strip-types test/*.test.ts && node --experimental-strip-types src/cli.ts --config configs/debug.json"]
+
+  result-provenance-gate:
+    image: node:24.2.0-alpine
+    working_dir: /workspace/packages/experiments
+    volumes:
+      - .:/workspace
+    command: ["node", "--experimental-strip-types", "src/resultProvenanceGate.ts"]
+
+  experiment-basic-matrix-test:
+    image: node:24.2.0-alpine
+    working_dir: /workspace/packages/experiments
+    volumes:
+      - .:/workspace
+    command: ["sh", "-c", "node --test --experimental-strip-types test/*.test.ts && node --experimental-strip-types src/cli.ts --config configs/arpe_basic_debug.json"]
+
+  experiment-minimum-matrix-test:
+    image: node:24.2.0-alpine
+    working_dir: /workspace/packages/experiments
+    volumes:
+      - .:/workspace
+    command: ["sh", "-c", "node --experimental-strip-types src/cli.ts --config configs/arpe_basic_matrix.json"]
+
+  experiment-hard-matrix-test:
+    image: node:24.2.0-alpine
+    working_dir: /workspace/packages/experiments
+    volumes:
+      - .:/workspace
+    command: ["sh", "-c", "node --test --experimental-strip-types test/*.test.ts && node --experimental-strip-types src/cli.ts --config configs/arpe_hard_debug.json"]
+
+  paper-arpe:
+    image: node:24.2.0-alpine
+    profiles: ["paper-arpe"]
+    working_dir: /workspace/packages/experiments
+    volumes:
+      - .:/workspace
+    command: ["sh", "-c", "node --test --experimental-strip-types test/*.test.ts && node --experimental-strip-types src/cli.ts --config configs/arpe_basic_debug.json && node --experimental-strip-types src/cli.ts --config configs/arpe_hard_debug.json"]
+
+  paper-arpe-full:
+    image: node:24.2.0-alpine
+    profiles: ["besu_live_arpe_full"]
+    working_dir: /workspace/packages/experiments
+    volumes:
+      - .:/workspace
+    command: ["sh", "-c", "node --test --experimental-strip-types test/*.test.ts && node --experimental-strip-types src/cli.ts --config configs/arpe_basic_matrix.json && node --experimental-strip-types src/cli.ts --config configs/arpe_hard_debug.json && node --experimental-strip-types src/cli.ts --config configs/arpe_hash_only_ablation_hard_debug.json"]
+
+  audit-ui-data-test:
+    image: node:24.2.0-alpine
+    working_dir: /workspace/packages/audit-ui
+    volumes:
+      - .:/workspace
+    command: ["sh", "-c", "node --test --experimental-strip-types test/*.test.ts"]
+
+  audit-ui-build:
+    image: node:24.2.0-alpine
+    working_dir: /workspace/packages/audit-ui
+    volumes:
+      - .:/workspace
+    command: ["sh", "-c", "test -f ../../runs/phase7-minimum/manifest.json && node --experimental-strip-types src/build-demo-data.ts --run-root ../../runs/phase7-minimum --out public/demo-data/ui-data.json && test -f public/index.html && test -f public/app.js && test -f public/styles.css && test -f public/demo-data/ui-data.json"]
+
+  besu-dev:
+    image: hyperledger/besu:25.6.0
+    profiles: ["besu-dev", "besu_live_arpe_full"]
+    ports:
+      - "127.0.0.1:8545:8545"
+    environment:
+      GOVPROV_DEV_ADMIN_ADDRESS: "${GOVPROV_DEV_ADMIN_ADDRESS:-}"
+    volumes:
+      - ./chain/besu/dev/data:/var/lib/besu
+      - ./chain/besu/dev/qbft-config.json:/etc/besu/qbft-config.json:ro
+      - ./chain/besu/dev/start-besu-dev.sh:/etc/besu/start-besu-dev.sh:ro
+    entrypoint: ["/bin/sh", "/etc/besu/start-besu-dev.sh"]
+
+  besu-rpc-smoke:
+    image: curlimages/curl:8.10.1
+    profiles: ["besu-dev"]
+    depends_on:
+      - besu-dev
+    environment:
+      BESU_RPC_URL: "http://besu-dev:8545"
+      BESU_EXPECTED_CHAIN_ID: "0x539"
+      BESU_FUNDED_ACCOUNT: "0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf"
+    volumes:
+      - .:/workspace:ro
+    entrypoint: ["/bin/sh", "/workspace/chain/besu/dev/rpc-smoke.sh"]
+
+  besu-contract-deploy:
+    image: ghcr.io/foundry-rs/foundry:v1.0.0
+    profiles: ["besu-dev"]
+    depends_on:
+      - besu-dev
+    working_dir: /workspace/contracts
+    volumes:
+      - .:/workspace
+    environment:
+      BESU_RPC_URL: "http://besu-dev:8545"
+      GOVPROV_DEPLOYMENT_MANIFEST: "../runs/besu-dev/ledger/deployment_manifest.json"
+      GOVPROV_DEV_DEPLOYER_PRIVATE_KEY: "${GOVPROV_DEV_DEPLOYER_PRIVATE_KEY:-}"
+    entrypoint: ["/bin/sh", "./scripts/foundry-entrypoint.sh"]
+    command: ["sh", "./scripts/deploy-besu-dev.sh"]
+
+  besu-ledger-smoke:
+    image: ghcr.io/foundry-rs/foundry:v1.0.0
+    profiles: ["besu-dev"]
+    depends_on:
+      - besu-dev
+    working_dir: /workspace/contracts
+    volumes:
+      - .:/workspace
+    environment:
+      BESU_RPC_URL: "http://besu-dev:8545"
+      GOVPROV_DEPLOYMENT_MANIFEST: "../runs/besu-dev/ledger/deployment_manifest.json"
+      GOVPROV_LEDGER_SMOKE_OUTPUT: "../runs/besu-dev/ledger/smoke.json"
+      GOVPROV_DEV_DEPLOYER_PRIVATE_KEY: "${GOVPROV_DEV_DEPLOYER_PRIVATE_KEY:-}"
+    entrypoint: ["/bin/sh", "./scripts/foundry-entrypoint.sh"]
+    command: ["sh", "./scripts/besu-ledger-smoke.sh"]
+
+  besu-live-smoke:
+    image: ghcr.io/foundry-rs/foundry:v1.0.0
+    profiles: ["besu-dev"]
+    depends_on:
+      - besu-dev
+    working_dir: /workspace/contracts
+    volumes:
+      - .:/workspace
+    environment:
+      BESU_RPC_URL: "http://besu-dev:8545"
+      GOVPROV_DEPLOYMENT_MANIFEST: "../runs/besu-dev/ledger/deployment_manifest.json"
+      GOVPROV_LEDGER_SMOKE_OUTPUT: "../runs/besu-dev/ledger/smoke.json"
+      GOVPROV_LIVE_BESU_STATUS_OUTPUT: "../runs/besu-dev/ledger/live_smoke_status.json"
+      GOVPROV_LIVE_BESU_STATUS_TABLE: "../runs/besu-dev/paper/table_live_besu_status.md"
+      GOVPROV_LEDGER_SMOKE_LABEL: "besu-dev"
+      GOVPROV_DEV_DEPLOYER_PRIVATE_KEY: "${GOVPROV_DEV_DEPLOYER_PRIVATE_KEY:-}"
+    entrypoint: ["/bin/sh", "./scripts/foundry-entrypoint.sh"]
+    command: ["sh", "./scripts/besu-live-smoke.sh"]
+
+  besu-live-arpe-full:
+    image: ghcr.io/foundry-rs/foundry:v1.0.0
+    profiles: ["besu_live_arpe_full"]
+    depends_on:
+      - besu-dev
+    working_dir: /workspace/contracts
+    volumes:
+      - .:/workspace
+    environment:
+      BESU_RPC_URL: "http://besu-dev:8545"
+      GOVPROV_DEPLOYMENT_MANIFEST: "../runs/besu-live-arpe-full/ledger/deployment_manifest.json"
+      GOVPROV_LIVE_ARPE_FULL_STATUS_OUTPUT: "../runs/besu-live-arpe-full/ledger/live_arpe_full_status.json"
+      GOVPROV_LIVE_ARPE_FULL_AUDIT_OUTPUT: "../runs/besu-live-arpe-full/audit/live_besu_audit_results.jsonl"
+      GOVPROV_LIVE_ARPE_FULL_TABLE_OUTPUT: "../runs/besu-live-arpe-full/paper/table_live_besu_status.md"
+      GOVPROV_LIVE_ARPE_FULL_GAS_USAGE_OUTPUT: "../runs/besu-live-arpe-full/results/gas_usage.csv"
+      GOVPROV_LIVE_ARPE_FULL_GAS_SUMMARY_OUTPUT: "../runs/besu-live-arpe-full/results/gas_summary.csv"
+      GOVPROV_DEV_DEPLOYER_PRIVATE_KEY: "${GOVPROV_DEV_DEPLOYER_PRIVATE_KEY:-}"
+    entrypoint: ["/bin/sh", "./scripts/foundry-entrypoint.sh"]
+    command: ["sh", "./scripts/besu-live-arpe-full.sh"]
+
+  temporal-ordering-besu:
+    image: ghcr.io/foundry-rs/foundry:v1.0.0
+    profiles: ["temporal-ordering"]
+    user: "0:0"
+    depends_on:
+      - besu-dev
+    working_dir: /workspace/contracts
+    volumes:
+      - .:/workspace
+    environment:
+      BESU_RPC_URL: "http://besu-dev:8545"
+      GOVPROV_DEV_DEPLOYER_PRIVATE_KEY: "${GOVPROV_DEV_DEPLOYER_PRIVATE_KEY:-}"
+      GOVPROV_TEMPORAL_ACTOR_PRIVATE_KEY: "${GOVPROV_TEMPORAL_ACTOR_PRIVATE_KEY:-}"
+      GOVPROV_TEMPORAL_RUN_ID: "${GOVPROV_TEMPORAL_RUN_ID:-}"
+      GOVPROV_TEMPORAL_CASES_TSV: "${GOVPROV_TEMPORAL_CASES_TSV:-}"
+      GOVPROV_TEMPORAL_CASES_JSON: "${GOVPROV_TEMPORAL_CASES_JSON:-}"
+    entrypoint: ["/bin/sh", "./scripts/temporal-ordering-besu.sh"]
+
+  temporal-hardening-besu:
+    image: ghcr.io/foundry-rs/foundry:v1.0.0
+    profiles: ["temporal-hardening"]
+    user: "0:0"
+    depends_on:
+      - besu-dev
+    working_dir: /workspace/contracts
+    volumes:
+      - .:/workspace
+    environment:
+      BESU_RPC_URL: "http://besu-dev:8545"
+      GOVPROV_DEV_DEPLOYER_PRIVATE_KEY: "${GOVPROV_DEV_DEPLOYER_PRIVATE_KEY:-}"
+      GOVPROV_TEMPORAL_ACTOR_PRIVATE_KEY: "${GOVPROV_TEMPORAL_ACTOR_PRIVATE_KEY:-}"
+      GOVPROV_TEMPORAL_RUN_ID: "${GOVPROV_TEMPORAL_RUN_ID:-}"
+      GOVPROV_TEMPORAL_CASES_TSV: "${GOVPROV_TEMPORAL_CASES_TSV:-}"
+      GOVPROV_TEMPORAL_CASES_JSON: "${GOVPROV_TEMPORAL_CASES_JSON:-}"
+    entrypoint: ["/bin/sh", "./scripts/temporal-hardening-besu.sh"]
+
+  temporal-hardening-report:
+    image: node:24.2.0-alpine
+    profiles: ["temporal-hardening"]
+    depends_on:
+      - besu-dev
+    working_dir: /workspace/packages/experiments
+    volumes:
+      - .:/workspace
+    environment:
+      GOVPROV_DEV_DEPLOYER_PRIVATE_KEY: "${GOVPROV_DEV_DEPLOYER_PRIVATE_KEY:-}"
+      GOVPROV_TEMPORAL_RUN_ID: "${GOVPROV_TEMPORAL_RUN_ID:-}"
+      GOVPROV_TEMPORAL_RPC_URL: "http://besu-dev:8545"
+    command: ["sh", "-c", "node --experimental-strip-types temporal-ordering/src/hardeningReport.ts --run-root ../../runs/$${GOVPROV_TEMPORAL_RUN_ID}/temporal_ordering"]
+
+  temporal-ordering-test:
+    image: node:24.2.0-alpine
+    working_dir: /workspace/packages/experiments
+    volumes:
+      - .:/workspace
+    command: ["sh", "-c", "node --test --experimental-strip-types temporal-ordering/test/*.test.ts"]
+
+  temporal-ordering-report:
+    image: node:24.2.0-alpine
+    profiles: ["temporal-ordering"]
+    depends_on:
+      - besu-dev
+    working_dir: /workspace/packages/experiments
+    volumes:
+      - .:/workspace
+    environment:
+      GOVPROV_DEV_DEPLOYER_PRIVATE_KEY: "${GOVPROV_DEV_DEPLOYER_PRIVATE_KEY:-}"
+      GOVPROV_TEMPORAL_RUN_ID: "${GOVPROV_TEMPORAL_RUN_ID:-}"
+      GOVPROV_TEMPORAL_RPC_URL: "http://besu-dev:8545"
+    command: ["sh", "-c", "node --experimental-strip-types temporal-ordering/src/cli.ts --run-root ../../runs/$${GOVPROV_TEMPORAL_RUN_ID}/temporal_ordering"]
+
+  scenario-s1-besu-test:
+    image: ghcr.io/foundry-rs/foundry:v1.0.0
+    profiles: ["besu-dev"]
+    depends_on:
+      - besu-dev
+    working_dir: /workspace/contracts
+    volumes:
+      - .:/workspace
+    environment:
+      BESU_RPC_URL: "http://besu-dev:8545"
+      GOVPROV_DEPLOYMENT_MANIFEST: "../runs/besu-dev/ledger/deployment_manifest.json"
+      GOVPROV_S1_BESU_OUTPUT: "../runs/besu-dev/scenarios/S1_runbook_update/govreplay_besu.json"
+      GOVPROV_DEV_DEPLOYER_PRIVATE_KEY: "${GOVPROV_DEV_DEPLOYER_PRIVATE_KEY:-}"
+    entrypoint: ["/bin/sh", "./scripts/foundry-entrypoint.sh"]
+    command: ["sh", "./scripts/s1-besu-scenario.sh"]
+
+  scenario-s4-besu-test:
+    image: ghcr.io/foundry-rs/foundry:v1.0.0
+    profiles: ["besu-dev"]
+    depends_on:
+      - besu-dev
+    working_dir: /workspace/contracts
+    volumes:
+      - .:/workspace
+    environment:
+      BESU_RPC_URL: "http://besu-dev:8545"
+      GOVPROV_DEPLOYMENT_MANIFEST: "../runs/besu-dev/ledger/deployment_manifest.json"
+      GOVPROV_S4_BESU_OUTPUT: "../runs/besu-dev/scenarios/S4_policy_gated_deployment/govreplay_besu.json"
+      GOVPROV_DEV_DEPLOYER_PRIVATE_KEY: "${GOVPROV_DEV_DEPLOYER_PRIVATE_KEY:-}"
+    entrypoint: ["/bin/sh", "./scripts/foundry-entrypoint.sh"]
+    command: ["sh", "./scripts/s4-besu-scenario.sh"]
+
+  besu-experiment-init:
+    image: hyperledger/besu:25.6.0
+    profiles: ["besu-experiment"]
+    volumes:
+      - ./chain/besu/experiment/network:/var/lib/besu-experiment/network
+      - ./chain/besu/experiment/qbft-config.json:/etc/besu/qbft-config.json:ro
+      - ./chain/besu/experiment/generate-experiment-network.sh:/etc/besu/generate-experiment-network.sh:ro
+    entrypoint: ["/bin/sh", "/etc/besu/generate-experiment-network.sh"]
+    networks:
+      - besu-experiment-net
+
+  besu-experiment-1:
+    image: hyperledger/besu:25.6.0
+    profiles: ["besu-experiment"]
+    depends_on:
+      besu-experiment-init:
+        condition: service_completed_successfully
+    ports:
+      - "127.0.0.1:8546:8545"
+    environment:
+      BESU_NODE_INDEX: "1"
+    volumes:
+      - ./chain/besu/experiment/network:/var/lib/besu-experiment/network:ro
+      - ./chain/besu/experiment/node-1/data:/var/lib/besu
+      - ./chain/besu/experiment/start-besu-experiment-node.sh:/etc/besu/start-besu-experiment-node.sh:ro
+    entrypoint: ["/bin/sh", "/etc/besu/start-besu-experiment-node.sh"]
+    networks:
+      besu-experiment-net:
+        ipv4_address: 172.28.0.11
+
+  besu-experiment-2:
+    image: hyperledger/besu:25.6.0
+    profiles: ["besu-experiment"]
+    depends_on:
+      besu-experiment-init:
+        condition: service_completed_successfully
+    environment:
+      BESU_NODE_INDEX: "2"
+    volumes:
+      - ./chain/besu/experiment/network:/var/lib/besu-experiment/network:ro
+      - ./chain/besu/experiment/node-2/data:/var/lib/besu
+      - ./chain/besu/experiment/start-besu-experiment-node.sh:/etc/besu/start-besu-experiment-node.sh:ro
+    entrypoint: ["/bin/sh", "/etc/besu/start-besu-experiment-node.sh"]
+    networks:
+      besu-experiment-net:
+        ipv4_address: 172.28.0.12
+
+  besu-experiment-3:
+    image: hyperledger/besu:25.6.0
+    profiles: ["besu-experiment"]
+    depends_on:
+      besu-experiment-init:
+        condition: service_completed_successfully
+    environment:
+      BESU_NODE_INDEX: "3"
+    volumes:
+      - ./chain/besu/experiment/network:/var/lib/besu-experiment/network:ro
+      - ./chain/besu/experiment/node-3/data:/var/lib/besu
+      - ./chain/besu/experiment/start-besu-experiment-node.sh:/etc/besu/start-besu-experiment-node.sh:ro
+    entrypoint: ["/bin/sh", "/etc/besu/start-besu-experiment-node.sh"]
+    networks:
+      besu-experiment-net:
+        ipv4_address: 172.28.0.13
+
+  besu-experiment-4:
+    image: hyperledger/besu:25.6.0
+    profiles: ["besu-experiment"]
+    depends_on:
+      besu-experiment-init:
+        condition: service_completed_successfully
+    environment:
+      BESU_NODE_INDEX: "4"
+    volumes:
+      - ./chain/besu/experiment/network:/var/lib/besu-experiment/network:ro
+      - ./chain/besu/experiment/node-4/data:/var/lib/besu
+      - ./chain/besu/experiment/start-besu-experiment-node.sh:/etc/besu/start-besu-experiment-node.sh:ro
+    entrypoint: ["/bin/sh", "/etc/besu/start-besu-experiment-node.sh"]
+    networks:
+      besu-experiment-net:
+        ipv4_address: 172.28.0.14
+
+  besu-experiment-rpc-smoke:
+    image: curlimages/curl:8.10.1
+    profiles: ["besu-experiment"]
+    depends_on:
+      - besu-experiment-1
+      - besu-experiment-2
+      - besu-experiment-3
+      - besu-experiment-4
+    environment:
+      BESU_RPC_URL: "http://besu-experiment-1:8545"
+      BESU_EXPECTED_CHAIN_ID: "0x53a"
+      BESU_FUNDED_ACCOUNT: "0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf"
+      BESU_EXPECTED_VALIDATORS: "4"
+    volumes:
+      - .:/workspace:ro
+    entrypoint: ["/bin/sh", "/workspace/chain/besu/experiment/rpc-network-smoke.sh"]
+    networks:
+      - besu-experiment-net
+
+  besu-experiment-contract-deploy:
+    image: ghcr.io/foundry-rs/foundry:v1.0.0
+    profiles: ["besu-experiment"]
+    depends_on:
+      - besu-experiment-1
+    working_dir: /workspace/contracts
+    volumes:
+      - .:/workspace
+    environment:
+      BESU_RPC_URL: "http://besu-experiment-1:8545"
+      GOVPROV_DEPLOYMENT_MANIFEST: "../runs/besu-experiment/ledger/deployment_manifest.json"
+      GOVPROV_DEPLOYMENT_CHAIN_ID: "1338"
+      GOVPROV_DEPLOYMENT_NETWORK: "besu-local-experiment"
+      GOVPROV_DEPLOYMENT_GENESIS_LABEL: "besu-experiment-network-genesis"
+      GOVPROV_DEPLOYMENT_RPC_ENDPOINT: "http://besu-experiment-1:8545"
+      GOVPROV_DEPLOYMENT_CONTRACT_SET_LABEL: "govprov:contract-set:besu-experiment:v1"
+      GOVPROV_DEV_DEPLOYER_PRIVATE_KEY: "${GOVPROV_DEV_DEPLOYER_PRIVATE_KEY:-}"
+    entrypoint: ["/bin/sh", "./scripts/foundry-entrypoint.sh"]
+    command: ["sh", "./scripts/deploy-besu-dev.sh"]
+    networks:
+      - besu-experiment-net
+
+  besu-experiment-ledger-smoke:
+    image: ghcr.io/foundry-rs/foundry:v1.0.0
+    profiles: ["besu-experiment"]
+    depends_on:
+      - besu-experiment-1
+    working_dir: /workspace/contracts
+    volumes:
+      - .:/workspace
+    environment:
+      BESU_RPC_URL: "http://besu-experiment-1:8545"
+      GOVPROV_DEPLOYMENT_MANIFEST: "../runs/besu-experiment/ledger/deployment_manifest.json"
+      GOVPROV_LEDGER_SMOKE_OUTPUT: "../runs/besu-experiment/ledger/smoke.json"
+      GOVPROV_LEDGER_SMOKE_LABEL: "besu-experiment"
+      GOVPROV_DEV_DEPLOYER_PRIVATE_KEY: "${GOVPROV_DEV_DEPLOYER_PRIVATE_KEY:-}"
+    entrypoint: ["/bin/sh", "./scripts/foundry-entrypoint.sh"]
+    command: ["sh", "./scripts/besu-ledger-smoke.sh"]
+    networks:
+      - besu-experiment-net
+
+networks:
+  besu-experiment-net:
+    ipam:
+      config:
+        - subnet: 172.28.0.0/24

@@ -1,0 +1,89 @@
+{
+  "schema_version": "govprov.policy_drift_fixtures.v1",
+  "cases": [
+    {
+      "id": "drift-001-p3-historical-current-pass",
+      "classification": "historical_pass_current_pass",
+      "historical_attestation_file": "software-delivery-p3-evidence-strengthened.allow-runbook-strengthened-evidence.signed.attestation.json",
+      "historical_policy_bundle_hash": "0xd113b711e9b1e7136c1b1c6a3ef802d690c6f3e86931404375870402924cd36b",
+      "current_policy_bundle_name": "software-delivery-p3-evidence-strengthened",
+      "current_policy_bundle_hash": "0xd113b711e9b1e7136c1b1c6a3ef802d690c6f3e86931404375870402924cd36b",
+      "historical_decision": "allow",
+      "current_decision": "allow",
+      "policy_hash_consistent": true,
+      "action_id": "propose_runbook_update",
+      "workflow_id": "wf-p3-runbook-allow",
+      "note": "P3 runbook decision remains compliant under the current P3 bundle."
+    },
+    {
+      "id": "drift-002-p1-pass-p3-current-fail",
+      "classification": "historical_pass_current_fail",
+      "historical_attestation_file": "software-delivery-p1-baseline.allow-runbook-baseline.signed.attestation.json",
+      "historical_policy_bundle_hash": "0xee5bf73acae02c902248d4df2ea4eeaa049ea70b6c785446f55e70faa37e9634",
+      "current_policy_bundle_name": "software-delivery-p3-evidence-strengthened",
+      "current_policy_bundle_hash": "0xd113b711e9b1e7136c1b1c6a3ef802d690c6f3e86931404375870402924cd36b",
+      "historical_decision": "allow",
+      "current_decision": "deny",
+      "policy_hash_consistent": true,
+      "action_id": "propose_runbook_update",
+      "workflow_id": "wf-p1-runbook-allow",
+      "note": "P1 baseline runbook evidence passed historically but fails current P3 strengthened evidence requirements."
+    },
+    {
+      "id": "drift-003-p1-fail-p3-current-fail",
+      "classification": "historical_fail_current_fail",
+      "historical_attestation_file": "software-delivery-p1-baseline.deny-runbook-missing-evidence.signed.attestation.json",
+      "historical_policy_bundle_hash": "0xee5bf73acae02c902248d4df2ea4eeaa049ea70b6c785446f55e70faa37e9634",
+      "current_policy_bundle_name": "software-delivery-p3-evidence-strengthened",
+      "current_policy_bundle_hash": "0xd113b711e9b1e7136c1b1c6a3ef802d690c6f3e86931404375870402924cd36b",
+      "historical_decision": "deny",
+      "current_decision": "deny",
+      "policy_hash_consistent": true,
+      "action_id": "propose_runbook_update",
+      "workflow_id": "wf-p1-runbook-deny",
+      "note": "Missing runbook evidence fails historically and still fails current P3."
+    },
+    {
+      "id": "drift-004-p3-fail-p1-current-pass",
+      "classification": "historical_fail_current_pass",
+      "historical_attestation_file": "software-delivery-p3-evidence-strengthened.deny-runbook-baseline-evidence.signed.attestation.json",
+      "historical_policy_bundle_hash": "0xd113b711e9b1e7136c1b1c6a3ef802d690c6f3e86931404375870402924cd36b",
+      "current_policy_bundle_name": "software-delivery-p1-baseline",
+      "current_policy_bundle_hash": "0xee5bf73acae02c902248d4df2ea4eeaa049ea70b6c785446f55e70faa37e9634",
+      "historical_decision": "deny",
+      "current_decision": "allow",
+      "policy_hash_consistent": true,
+      "action_id": "propose_runbook_update",
+      "workflow_id": "wf-p3-runbook-deny",
+      "note": "A P3-denied baseline-evidence runbook update would pass the older P1 baseline bundle."
+    },
+    {
+      "id": "drift-005-policy-not-available",
+      "classification": "policy_not_available",
+      "historical_attestation_file": "software-delivery-p2-strict-approval.allow-config-dual-approval.signed.attestation.json",
+      "historical_policy_bundle_hash": "0xfdf5b9a443ca62b5e0bf333bb0e6a150b19bf724c68aaa34a9c12edfa2901422",
+      "current_policy_bundle_name": null,
+      "current_policy_bundle_hash": null,
+      "historical_decision": "allow",
+      "current_decision": "unavailable",
+      "policy_hash_consistent": true,
+      "action_id": "propose_config_change",
+      "workflow_id": "wf-p2-config-allow",
+      "note": "Replay cannot load the requested current policy bundle."
+    },
+    {
+      "id": "drift-006-policy-hash-mismatch",
+      "classification": "policy_hash_mismatch",
+      "historical_attestation_file": "software-delivery-p2-strict-approval.deny-config-self-approval.signed.attestation.json",
+      "historical_policy_bundle_hash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "current_policy_bundle_name": "software-delivery-p2-strict-approval",
+      "current_policy_bundle_hash": "0xfdf5b9a443ca62b5e0bf333bb0e6a150b19bf724c68aaa34a9c12edfa2901422",
+      "historical_decision": "deny",
+      "current_decision": "deny",
+      "policy_hash_consistent": false,
+      "action_id": "propose_config_change",
+      "workflow_id": "wf-p2-config-deny",
+      "note": "The historical attestation's claimed policy hash does not match the signed decision predicate."
+    }
+  ]
+}

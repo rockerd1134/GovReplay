@@ -1,0 +1,68 @@
+{
+  "schema_version": "govprov.obligations.v1",
+  "defaults": {
+    "decision_ttl_seconds": 180
+  },
+  "obligations": [
+    {
+      "id": "p2-config-dual-approval",
+      "description": "High-risk configuration changes require two distinct configuration approvals.",
+      "applies_to_actions": ["propose_config_change"],
+      "required_evidence": {
+        "min_count": 2,
+        "evidence_types": ["alert_summary", "config_diff"]
+      },
+      "required_approval_roles": ["CONFIG_APPROVER", "SECURITY_REVIEWER"],
+      "separation_of_duties": {
+        "proposer_cannot_approve": true,
+        "distinct_approval_count": 2
+      },
+      "deployment_environment_constraints": {
+        "allowed_environments": ["production"],
+        "forbidden_environments": ["unregistered"]
+      },
+      "attestation_requirements": {
+        "required_attestation_types": [
+          "EvidenceBundleAttestation",
+          "ApprovalAttestation",
+          "PolicyDecisionAttestation"
+        ],
+        "policy_decision_must_include_bundle_hash": true
+      },
+      "expiration": {
+        "approval_max_age_seconds": 43200,
+        "evidence_max_age_seconds": 86400
+      }
+    },
+    {
+      "id": "p2-deployment-approval-role",
+      "description": "Production deployment requires a distinct deploy approver and approved artifact linkage.",
+      "applies_to_actions": ["deploy_artifact"],
+      "required_evidence": {
+        "min_count": 1,
+        "evidence_types": ["deployment_request"]
+      },
+      "required_approval_roles": ["DEPLOY_APPROVER"],
+      "separation_of_duties": {
+        "proposer_cannot_approve": true,
+        "distinct_approval_count": 1
+      },
+      "deployment_environment_constraints": {
+        "allowed_environments": ["production"],
+        "forbidden_environments": ["unregistered"]
+      },
+      "attestation_requirements": {
+        "required_attestation_types": [
+          "ApprovalAttestation",
+          "ArtifactAttestation",
+          "PolicyDecisionAttestation"
+        ],
+        "policy_decision_must_include_bundle_hash": true
+      },
+      "expiration": {
+        "approval_max_age_seconds": 43200,
+        "evidence_max_age_seconds": 86400
+      }
+    }
+  ]
+}

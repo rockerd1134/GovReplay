@@ -1,0 +1,5 @@
+--- a/services/payment-api/retry.ts
++++ b/services/payment-api/retry.ts
+@@
+-  throw new Error("retry attempts exhausted");
++  throw lastError ?? new Error("retry attempts exhausted");

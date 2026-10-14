@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://govprov.dev/schemas/attestations/artifact.schema.json",
+  "title": "ArtifactAttestation",
+  "allOf": [
+    { "$ref": "./common.schema.json" },
+    {
+      "type": "object",
+      "properties": {
+        "attestation_type": { "const": "ArtifactAttestation" },
+        "predicate_type": { "const": "https://govprov.dev/predicate/artifact/v1" },
+        "predicate": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["artifact_id", "artifact_type", "artifact_digest"],
+          "properties": {
+            "artifact_id": { "type": "string" },
+            "artifact_type": { "type": "string" },
+            "artifact_digest": { "$ref": "./common.schema.json#/$defs/digest" }
+          }
+        }
+      }
+    }
+  ]
+}
