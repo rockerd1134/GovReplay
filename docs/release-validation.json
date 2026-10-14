@@ -1,0 +1,61 @@
+{
+  "date": "2026-10-14",
+  "license": "Apache-2.0",
+  "copyright_holder": "Rocker D'Antonio",
+  "notes": [
+    "Registry/library behavior source is unchanged; bootstrap provisioning, network defaults and UI containment are release fixes.",
+    "Batching changes chain reset frequency and timing; it is finite conformance validation, not continuous long-history or performance evidence.",
+    "Raw runs, validator keys, wallets, dependency caches and reports are local/ignored; original research history is not published."
+  ],
+  "release_tag": "v0.1.0-ciss2027",
+  "fresh_clone_checks": {
+    "native_linux_node_package_tests": 104,
+    "named_status": "PASS",
+    "native_linux_contract_tests": 118,
+    "named_live_cases": 9
+  },
+  "paper": {
+    "author_and_submission_metadata": "pending author confirmation; title-only citation requested",
+    "title": "Historical Authorization at Commitment Boundaries in Software-Delivery Audit Trails",
+    "target": "IEEE ICC 2027 CISS"
+  },
+  "live_bounded_replay": {
+    "guarded_prediction_agreements": 420,
+    "extra_setup_receipts_vs_original": 14,
+    "guarded_receipts": 2936,
+    "property_comparisons": 1840,
+    "plans_per_implementation": 420,
+    "valid_full_histories": 214,
+    "block_period_seconds": 1,
+    "continuous_420_plan_single_chain_rerun": false,
+    "property_failures": 0,
+    "execution_layout": "8 isolated batches per implementation, 53 cases per batch except final 49; per-batch RPC receipt/event refetch and signature checks",
+    "classes": 6,
+    "baseline_receipts": 3544,
+    "baseline_prediction_agreements": 420,
+    "jvm_max_heap": "512m",
+    "guard_rejected_invalid_N": 152,
+    "segl_prediction_agreements": 420,
+    "parity_disagreements": 0,
+    "guard_accepted_valid_N": 268
+  },
+  "security": {
+    "intentional_synthetic_key_assignments": 25,
+    "scanner": "Gitleaks 8.30.1",
+    "runtime_credentials_in_git": false,
+    "scanner_image_digest": "sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f",
+    "source_tree_leaks": 0,
+    "candidate_history_leaks": 0
+  },
+  "frozen_predictions_sha256": "0f90cc0d2121914715adf7c5d9274f59c6c6b47f14d7dffe45cb2f9f1a99680f",
+  "tests": {
+    "node_packages": 104,
+    "temporal": 7,
+    "contracts": 118,
+    "total_distinct": 250,
+    "rust": 4,
+    "optional_experiments": 17,
+    "failures": 0
+  },
+  "candidate_source_commit": "3a39b050e1d067fe155daa9694eebd15e0dfe4a0"
+}
